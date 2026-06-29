@@ -1,22 +1,23 @@
 import os
 from dotenv import load_dotenv
+from tests_selenium.page_objects.cart_page import CartPage
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.login_page import LoginPage
-from tests_selenium.page_objects.cart_page import CartPage
 
 load_dotenv()
 
-
-def test_add_to_cart(browser):
+def test_delete_from_cart(browser):
     email = os.getenv('login')
     password = os.getenv('password')
     base_url = os.getenv('base_url')
+
     login_page = LoginPage(browser)
     home_page = HomePage(browser)
+    cart_page = CartPage(browser)
     login_page.open(base_url).login(email, password)
 
     assert home_page.is_user_logged_in()
-    cart_page = CartPage(browser)
+
     cart_page.add_to_cart()
     cart_page.close_cart_modal()
     cart_page.open_cart()
@@ -24,5 +25,8 @@ def test_add_to_cart(browser):
     cart_count = cart_page.get_current_quantity()
     assert cart_count > 0, f'В корзине {cart_count} товаров, ожидался минимум 1'
 
-    print(f'Товар успешно добавлен в корзину! Количество: {cart_count}')
+    cart_page.delete_from_cart()
+
+    cart_page.is_cart_empty_by_subtotal()
+
 

@@ -1,14 +1,16 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from tests_selenium.pages.login_page import LoginPage
-from tests_selenium.pages.register_page import RegisterPage
-from tests_selenium.pages.main_page import MainPage
-from tests_selenium.pages.product_page import ProductPage
-from tests_selenium.pages.catalog_page import CatalogPage
+from tests_selenium.page_objects.login_page import LoginPage
+from tests_selenium.page_objects.register_page import RegisterPage
+from tests_selenium.page_objects.main_page import MainPage
+from tests_selenium.page_objects.product_page import ProductPage
+from tests_selenium.page_objects.catalog_page import CatalogPage
+import os
+from dotenv import load_dotenv
 
-
-base_url = "http://localhost:8080"
+load_dotenv()
+base_url = os.getenv('base_url')
 
 
 def test_login_page(browser):
@@ -17,8 +19,8 @@ def test_login_page(browser):
         EC.presence_of_element_located((By.TAG_NAME, "h1"))
     )
     browser.find_elements(*LoginPage.LOGIN_BUTTON)
-    browser.find_elements(*LoginPage.EMAIL)
-    browser.find_elements(*LoginPage.PASSWORD)
+    browser.find_elements(*LoginPage.EMAIL_INPUT)
+    browser.find_elements(*LoginPage.PASSWORD_INPUT)
     browser.find_elements(*LoginPage.FORGOTTEN_PASSWORD)
     browser.find_elements(*LoginPage.SIGNIN_LINK)
 
@@ -26,7 +28,7 @@ def test_login_page(browser):
 def test_main_page(browser):
     browser.get(f'{base_url}')
     WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.TAG_NAME, "h1"))
+        EC.presence_of_element_located((By.TAG_NAME, 'h1'))
     )
     browser.find_elements(*MainPage.USER_BUTTON)
     browser.find_elements(*MainPage.SUBSCRIBE_BUTTON)
@@ -38,7 +40,7 @@ def test_main_page(browser):
 def test_register_page(browser):
     browser.get(f'{base_url}/registration')
     WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.TAG_NAME, "h1"))
+        EC.presence_of_element_located((By.TAG_NAME, 'h1'))
     )
     browser.find_elements(*RegisterPage.REGISTER_FORM)
     browser.find_elements(*RegisterPage.EMAIL_INPUT)
@@ -68,7 +70,7 @@ def test_product_page(browser):
     browser.find_elements(*ProductPage.PRODUCT_BANNER)
     browser.find_elements(*ProductPage.NAME)
     browser.find_elements(*ProductPage.SIZE)
-    browser.find_elements(*ProductPage.QUANTITY)
-    browser.find_elements(*ProductPage.ADD_TO_CART_BUTTON)
+    browser.find_elements(*ProductPage.PRODUCT_BANNER)
+    browser.find_elements(*ProductPage.PRODUCT_PRICE)
 
 

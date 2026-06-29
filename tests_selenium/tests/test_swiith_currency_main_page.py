@@ -1,40 +1,23 @@
 import os
 from dotenv import load_dotenv
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from tests_selenium.pages.main_page import MainPage
-from tests_selenium.pages.login_page import LoginPage
+from tests_selenium.page_objects.home_page import HomePage
+from tests_selenium.page_objects.main_page import MainPage
+from tests_selenium.page_objects.login_page import LoginPage
 
 load_dotenv()
 
-base_url = "http://localhost:8080"
-
 
 def test_switch_currency_main_page(browser):
-    login = os.getenv("login")
-    password = os.getenv("password")
-    browser.get(f"{base_url}/login")
-    wait = WebDriverWait(browser, 15)
-    wait.until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
-    email_input = wait.until(
-        EC.visibility_of_element_located(LoginPage.EMAIL)
-    )
-    email_input.send_keys(login)
+    email = os.getenv('login')
+    password = os.getenv('password')
+    base_url = os.getenv('base_url')
 
-    password_input = browser.find_element(*LoginPage.PASSWORD)
-    password_input.send_keys(password)
+    login_page = LoginPage(browser)
+    home_page = HomePage(browser)
+    main_page = MainPage(browser)
+    login_page.open(base_url).login(email, password)
 
-    login_button = browser.find_element(*LoginPage.LOGIN_BUTTON)
-    login_button.click()
+    assert home_page.is_user_logged_in()
 
-    currency_button = browser.find_element(*MainPage.CURRENCY_BUTTON)
-    currency_button.click()
-
-    wait.until(EC.visibility_of_element_located(MainPage.USD_OPTION))
-
-    usd_option = browser.find_element(*MainPage.USD_OPTION)
-    usd_option.click()
-
-    price_text = browser.find_element(*MainPage.USD_PRICE).text
-    assert "$" in price_text, f"Цена не в долларах: {price_text}"
+    main_page.currency_usd_switch()
+    main_page.price_in_usd()
