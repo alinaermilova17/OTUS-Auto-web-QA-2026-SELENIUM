@@ -1,20 +1,16 @@
-import os
-from dotenv import load_dotenv
 from tests_selenium.page_objects.cart_page import CartPage
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.login_page import LoginPage
+from config import LOGIN, PASSWORD, BASE_URL
 
-load_dotenv()
 
 def test_delete_from_cart(browser):
-    email = os.getenv('login')
-    password = os.getenv('password')
-    base_url = os.getenv('base_url')
-
     login_page = LoginPage(browser)
     home_page = HomePage(browser)
     cart_page = CartPage(browser)
-    login_page.open(base_url).login(email, password)
+
+    login_page.open(f'{BASE_URL}/login')
+    login_page.login(LOGIN, PASSWORD)
 
     assert home_page.is_user_logged_in()
 
@@ -26,7 +22,6 @@ def test_delete_from_cart(browser):
     assert cart_count > 0, f'В корзине {cart_count} товаров, ожидался минимум 1'
 
     cart_page.delete_from_cart()
-
     cart_page.is_cart_empty_by_subtotal()
 
 

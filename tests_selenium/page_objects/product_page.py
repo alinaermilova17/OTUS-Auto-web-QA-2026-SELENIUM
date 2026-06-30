@@ -1,22 +1,15 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from tests_selenium.page_objects.base_page import BasePage
 
 
-class ProductPage:
+class ProductPage(BasePage):
     PRODUCT_NAME = (By.CSS_SELECTOR, 'h1.h1')
     PRODUCT_PRICE = (By.CSS_SELECTOR, '.current-price span')
     PRODUCT_BANNER = (By.CSS_SELECTOR, "img[alt='Hummingbird printed t-shirt']")
-    NAME = (By.CSS_SELECTOR, 'main > div.row.product-container.js-product-container > div:nth-child(2) > h1')
-    SIZE = (By.CSS_SELECTOR, 'group_1')
-    PRODUCT_NAME_IN_CART = (By.CSS_SELECTOR, '.product-line-info a')
-
-    def __init__(self, browser):
-        self.browser = browser
-        self.wait = WebDriverWait(browser, 10)
-
+    PRICE_VALUE = (By.CSS_SELECTOR, '.current-price-value')
+    SIZE_SELECTOR = (By.CSS_SELECTOR, 'select.form-control#group_1')
+    ADD_TO_CART_BUTTON = (By.XPATH, "//*[@id='add-to-cart-or-refresh']//button[@data-button-action='add-to-cart']")
 
     def get_product_name(self) -> str:
-        return self.wait.until(
-            EC.visibility_of_element_located(self.PRODUCT_NAME)).text
+        return self.wait_visible(self.PRODUCT_NAME).text
 
