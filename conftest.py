@@ -1,8 +1,5 @@
 import platform
-import time
-
 import pytest
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromiumService
 from selenium.webdriver.firefox.service import Service as FFService
@@ -16,11 +13,10 @@ def pytest_addoption(parser):
 
 @pytest.fixture()
 def browser(request):
-    browser_name = request.config.getoption("--browser")
-    url = request.config.getoption("--url")
+    browser_name = request.config.getoption('--browser')
+    url = request.config.getoption('--url')
 
-
-    if browser_name == "chrome":
+    if browser_name == 'chrome':
         driver = webdriver.Chrome(service=ChromiumService())
     elif browser_name == "firefox":
         if "24.04" in platform.version():
@@ -34,8 +30,9 @@ def browser(request):
     driver.maximize_window()
     driver.url = url
 
-    request.addfinalizer(driver.close)  # ← ПРОБЛЕМА!
+    yield driver
 
-    return driver
+    driver.quit()
+
 
 
