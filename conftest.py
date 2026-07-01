@@ -30,8 +30,9 @@ def browser(request):
     driver.maximize_window()
     driver.url = url
 
-    return driver
+    yield driver
 
+    driver.quit()
 
 
 
