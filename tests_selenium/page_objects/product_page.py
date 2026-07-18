@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
 
@@ -10,6 +11,7 @@ class ProductPage(BasePage):
     SIZE_SELECTOR = (By.CSS_SELECTOR, 'select.form-control#group_1')
     ADD_TO_CART_BUTTON = (By.XPATH, "//*[@id='add-to-cart-or-refresh']//button[@data-button-action='add-to-cart']")
 
+    @allure.step('Получить название товара')
     def get_product_name(self) -> str:
-        return self.wait_visible(self.PRODUCT_NAME).text
-
+        name = self.wait_visible(self.PRODUCT_NAME).text
+        return name

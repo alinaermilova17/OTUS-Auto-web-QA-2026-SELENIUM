@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
 
@@ -14,33 +15,43 @@ class RegisterPage(BasePage):
     AGREEMENT_CHECKBOX = (By.XPATH, "(//*[@id='customer-form']//input[@type='checkbox'])[2]")
     CUSTOMER_PRIVACY = (By.XPATH, "//*[@id='customer-form']/div/div[10]/div[1]/span/label/input")
 
+    @allure.step('Ввести имейл: {email}')
     def email_input(self, email: str ):
         return self.find(self.EMAIL_INPUT).send_keys(email)
 
+    @allure.step('Ввести пароль: {password}')
     def password_input(self, password: str):
         return self.find(self.PASSWORD_INPUT).send_keys(password)
 
+    @allure.step('Ввести имя: {firstname}')
     def firstname_input(self, firstname: str):
         return self.find(self.FIRSTNAME_INPUT).send_keys(firstname)
 
+    @allure.step('Ввести фамилию: {lastname}')
     def lastname_input(self, lastname: str):
         return self.find(self.LASTNAME_INPUT).send_keys(lastname)
 
+    @allure.step('Нажать кнопку Сохранить')
     def save_button(self):
         self.click(self.SAVE_BUTTON)
 
+    @allure.step('Выбрать чек-бок женского пола')
     def female_gender_input(self):
         self.find(self.FEMALE_GENDER).click()
 
+    @allure.step('Ввести дату рождения: {birthdate}')
     def birth_date_input(self,birthdate: str ):
         return self.find(self.BIRTH_DATE_INPUT).send_keys(birthdate)
 
+    @allure.step('Кликнуть чек-бок политики соглашения')
     def agreement_privacy(self):
         self.find(self.AGREEMENT_CHECKBOX).click()
 
+    @allure.step('Кликнуть чек-бокс политики потребителя')
     def customer_privacy(self):
         self.find(self.CUSTOMER_PRIVACY).click()
 
+    @allure.step('Зарегистрировать пользователя с данными: {user_data}')
     def register(self, user_data: dict):
         self.female_gender_input()
         self.firstname_input(user_data['firstname'])

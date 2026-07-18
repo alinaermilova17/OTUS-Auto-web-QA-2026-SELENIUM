@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
 
@@ -15,26 +16,33 @@ class CartPage(BasePage):
     DELETE_BUTTON = (By.CSS_SELECTOR, "a[data-link-action='delete-from-cart']")
     SUBTOTAL_ZERO_CHECK = (By.CSS_SELECTOR, '#cart-subtotal-products .label.js-subtotal')
 
+    @allure.step('Добавить продукт в корзину')
     def add_to_cart(self):
         self.find(self.PRODUCT_IMAGE).click()
         self.find(self.ADD_TO_CART_FROM_MAIN_PAGE).click()
 
+    @allure.step('Закрыть модальное окно корзины')
     def close_cart_modal(self):
         return self.click(self.MODAL_WIDOW_CLOSE_BUTTON)
 
+    @allure.step('Перейти к корзине')
     def open_cart(self):
         return self.click(self.CART_LABEL)
 
+    @allure.step('Продукт находится в корзине')
     def is_product_in_cart(self):
         return self.is_visible(self.ITEM_TO_CART)
 
+    @allure.step('Проверить текущее количество в корзине')
     def get_current_quantity(self) -> int:
-        quantity = self.get_attribute(self.QUANTITY, "value")
+        quantity = self.get_attribute(self.QUANTITY, 'value')
         return int(quantity)
 
+    @allure.step('Удалить продукт из корзины')
     def delete_from_cart(self):
         return self.find(self.DELETE_BUTTON).click()
 
+    @allure.step('Корзина пуста')
     def is_cart_empty_by_subtotal(self):
         try:
             element = self.find(self.SUBTOTAL_ZERO_CHECK)
