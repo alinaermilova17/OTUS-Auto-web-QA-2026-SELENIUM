@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
 
@@ -11,11 +12,13 @@ class MainPage(BasePage):
     CURRENCY_BUTTON = (By.CSS_SELECTOR, '.expand-more._gray-darker')
     USD_PRICE = (By.CSS_SELECTOR, "span.price[aria-label='Price']")
 
+    @allure.step("Изменить валюту на доллары")
     def currency_usd_switch(self):
         self.find(MainPage.CURRENCY_BUTTON).click()
         self.wait_visible(MainPage.USD_OPTION)
         self.find(MainPage.USD_OPTION).click()
 
+    @allure.step("Валюта в долларах")
     def price_in_usd(self):
         price_text = self.find(MainPage.USD_PRICE).text
         assert "$" in price_text, f"Цена не в долларах: {price_text}"

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
 
@@ -9,5 +10,7 @@ class CatalogPage(BasePage):
     SUBCATEGORY_MAN = (By.XPATH, "//a[text()='Men']")
     CLOTHES_CATEGORY = (By.XPATH, "//div[@class='block-categories']")
 
+    @allure.step("Нажать на подкатегорию 'Men'")
     def subcategory_men(self):
-        self.browser.find_element(*CatalogPage.SUBCATEGORY_MAN).click()
+        self.click(self.SUBCATEGORY_MAN)
+        return self

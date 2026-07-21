@@ -15,7 +15,6 @@ def generate_user_data():
         'birthdate': fake.date_of_birth(minimum_age=18, maximum_age=80).strftime('%m/%d/%Y')
     }
 
-
 def test_register_page(browser):
     user_data = generate_user_data()
     register_page = RegisterPage(browser)
@@ -25,3 +24,5 @@ def test_register_page(browser):
 
     assert home_page.is_user_logged_in(), (
 f"Пользователь {user_data['email']} не залогинен после регистрации")
+
+
