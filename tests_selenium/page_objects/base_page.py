@@ -35,7 +35,7 @@ class BasePage:
             raise AssertionError(f'Element with locator:{locator} is absent on page {self.browser.current_url}')
 
     @allure.step('Дождаться видимости элемента: {locator}')
-    def wait_visible(self, locator,timeout=10):
+    def wait_visible(self, locator,timeout=15):
         self.logger.debug(
             '| Class: %s | Wait %s sec for element: %s'
             % (self.class_name, str(timeout), str(locator))

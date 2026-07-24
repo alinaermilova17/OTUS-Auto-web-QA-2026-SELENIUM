@@ -18,7 +18,7 @@ def generate_user_data():
 def test_register_page(browser):
     user_data = generate_user_data()
     register_page = RegisterPage(browser)
-    register_page.open(f'{BASE_URL}/registration')
+    register_page.open(f'{BASE_URL}/login?create_account=1')
     register_page.register(user_data)
     home_page = HomePage(browser)
 
