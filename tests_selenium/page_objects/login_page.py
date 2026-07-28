@@ -15,7 +15,7 @@ class LoginPage(BasePage):
 
     @allure.step("Ввести имейл: {email}")
     def enter_email(self, email: str):
-        return self.wait_visible(self.EMAIL_INPUT).send_keys(email)
+        return self.wait_visible(self.EMAIL_INPUT, timeout=15).send_keys(email)
 
     @allure.step("Ввести пароль: {password}")
     def enter_password(self, password: str):

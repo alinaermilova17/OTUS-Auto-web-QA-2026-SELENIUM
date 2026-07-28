@@ -28,7 +28,7 @@ def test_main_page(browser):
 
 def test_register_page(browser):
     register_page = RegisterPage(browser)
-    register_page.open(f'{BASE_URL}/registration')
+    register_page.open(f'{BASE_URL}/login?create_account=1')
     register_page.find(RegisterPage.REGISTER_FORM)
     register_page.find(RegisterPage.EMAIL_INPUT)
     register_page.find(RegisterPage.PASSWORD_INPUT)

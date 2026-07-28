@@ -1,5 +1,15 @@
 allure-python-commons
 python-dotenv
-pytest==8.3.3
+pytest==9.0.3
 selenium==4.36.0
-allure-pytest
+allure-pytest==2.16.0
+webdriver-manager==4.0.1
+pytest-html==4.1.1
+pytest-xdist==3.5.0
+faker==22.6.0
+requests==2.31.0
+
+
+
+
+
