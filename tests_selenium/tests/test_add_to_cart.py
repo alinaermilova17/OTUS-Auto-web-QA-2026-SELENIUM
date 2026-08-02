@@ -14,7 +14,6 @@ def test_add_to_cart(browser):
     assert home_page.is_user_logged_in()
     cart_page = CartPage(browser)
     cart_page.add_to_cart()
-    cart_page.close_cart_modal()
     cart_page.open_cart()
 
     cart_count = cart_page.get_current_quantity()
