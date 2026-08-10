@@ -4,11 +4,10 @@ from tests_selenium.page_objects.base_page import BasePage
 
 
 class CartPage(BasePage):
-    ADD_TO_CART_BUTTON = (By.CSS_SELECTOR,
-                          'add-to-cart-or-refresh > div.product-add-to-cart.js-product-add-to-cart > div > div.add > button')
+    ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, 'button.add-to-cart')
     QUANTITY = (By.XPATH, "//div[contains(@class, 'qty')]//input[@type='number']")
     PRODUCT_IMAGE = (By.CSS_SELECTOR, "img[alt='Hummingbird printed t-shirt']")
-    ADD_TO_CART_FROM_MAIN_PAGE = (By.CSS_SELECTOR, "button[data-button-action='add-to-cart']")
+    ADD_TO_CART_FROM_MAIN_PAGE = (By.CSS_SELECTOR, 'button.add-to-cart')
     ITEM_TO_CART = (By.CSS_SELECTOR, '.cart-products-count')
     CART_ITEM = (By.CSS_SELECTOR, '.cart-products-count')
     MODAL_WIDOW_CLOSE_BUTTON = (By.XPATH, "//div[@id='blockcart-modal']//button[@data-dismiss='modal']/span/i")
@@ -18,8 +17,8 @@ class CartPage(BasePage):
 
     @allure.step('Добавить продукт в корзину')
     def add_to_cart(self):
-        self.find(self.PRODUCT_IMAGE).click()
-        self.find(self.ADD_TO_CART_FROM_MAIN_PAGE).click()
+        self.browser.get('http://prestashop:80/men/1-hummingbird-printed-t-shirt.html')
+        self.find(self.ADD_TO_CART_BUTTON).click()
 
     @allure.step('Закрыть модальное окно корзины')
     def close_cart_modal(self):
