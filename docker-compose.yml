@@ -5,6 +5,40 @@ networks:
 
 services:
 
+  selenium-hub:
+    image: selenium/hub:latest
+    container_name: selenium-hub
+    ports:
+      - "4442-4444:4442-4444"
+    networks:
+      - default
+
+  chrome:
+    image: selenium/node-chrome:latest
+    container_name: selenium-chrome
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=3
+    networks:
+      - default
+
+  firefox:
+    image: selenium/node-firefox:latest
+    container_name: selenium-firefox
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=3
+    networks:
+      - default
+
   mysql:
     image: mysql:5.7
     container_name: prestashop_mysql
@@ -21,6 +55,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - default
 
   prestashop:
     image: prestashop/prestashop:1.7.8.11
@@ -47,6 +83,8 @@ services:
       timeout: 10s
       retries: 3
       start_period: 90s
+    networks:
+      - default
 
   tests:
     build: .
@@ -55,26 +93,31 @@ services:
     depends_on:
       prestashop:
         condition: service_healthy
+      selenium-hub:
+        condition: service_started
     environment:
       - URL=http://prestashop:80
       - BROWSER=chrome
-      - BROWSER_VERSION=128.0
+      - BROWSER_VERSION=latest
       - EXECUTOR=selenoid
-      - EXECUTOR_URL=http://selenium-chrome:4444/wd/hub
+      - EXECUTOR_URL=http://selenium-hub:4444/wd/hub
     volumes:
       - ./tests_selenium:/app/tests_selenium
       - ./logs:/app/logs
       - ./reports:/app/reports
       - ./screenshots:/app/screenshots
-    entrypoint: ['pytest']
+    entrypoint: [ 'pytest' ]
     command: [
       'tests_selenium/tests/',
       '-v',
-      '--browser=${BROWSER:-chrome}',
-      '--browser_version=128',
+      '--browser=chrome',
+      '--browser_version=latest',
       '--executor=selenoid',
+      '--executor_url=http://selenium-hub:4444/wd/hub',
       '--url=http://prestashop:80'
     ]
+    networks:
+      - default
 
 volumes:
   dbdata:

@@ -6,7 +6,6 @@ import logging
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.service import Service as FFService
 from selenium.webdriver.firefox.options import Options as FFOptions
 
 log_level = "DEBUG"
@@ -14,18 +13,18 @@ log_level = "DEBUG"
 
 def pytest_addoption(parser):
     parser.addoption('--browser', action='store', default='chrome',
-                     help='Browser to run tests: chrome or firefox')
+                     help='Browser: chrome or firefox')
     parser.addoption('--browser_version', action='store', default='128.0',
-                     help='Browser version')
-    parser.addoption('--executor', action='store', default='selenoid',
-                     help='Executor: selenoid or local')
+                     help='Browser version for remote executor')
+    parser.addoption('--executor', action='store', default='local',
+                     help='Executor: local or selenoid')
     parser.addoption('--executor_url', action='store',
-                     default=os.getenv('EXECUTOR_URL','http://selenium-chrome:4444/wd/hub'),
-                     help='Executor URL')
+                     default='http://localhost:4444/wd/hub',
+                     help='Remote executor URL')
     parser.addoption('--headed', action='store_true', default=False,
                      help='Run browser in headed mode')
     parser.addoption('--url', action='store',
-                     default=os.getenv('URL', 'http://prestashop:80'),
+                     default=os.getenv('URL', 'http://localhost:8081'),
                      help="Base URL for PrestaShop")
 
 
@@ -51,85 +50,78 @@ def browser(request):
     headed = request.config.getoption('--headed')
     url = request.config.getoption('--url')
 
-    logger.info(f'Browser: {browser_name}, Version: {browser_version}, Headed: {headed}, Executor: {executor}, URL: {url}')
+    logger.info(f'Browser: {browser_name}, Version: {browser_version}, '
+                f'Headed: {headed}, Executor: {executor}, URL: {url}')
+
+    # Общие настройки для всех браузеров
+    if browser_name == 'chrome':
+        options = ChromeOptions()
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--window-size=1920,1080')
+        options.add_argument('--disable-notifications')
+        if not headed:
+            options.add_argument('--headless=new')
+    elif browser_name == 'firefox':
+        options = FFOptions()
+        options.add_argument('--width=1920')
+        options.add_argument('--height=1080')
+        if not headed:
+            options.add_argument('--headless')
+    else:
+        raise ValueError(f'Browser {browser_name} not supported')
 
     if executor == 'selenoid':
-        if browser_name == 'chrome':
-            options = ChromeOptions()
-            options.add_argument('--no-sandbox')
-            options.add_argument('--disable-dev-shm-usage')
-            options.add_argument('--disable-gpu')
-            options.add_argument('--window-size=1920,1080')
+        # ===== Удаленный запуск (Selenoid / Selenium Grid) =====
+        logger.info(f'Connecting to remote executor: {executor_url}')
 
-            if not headed:
-                options.add_argument('--headless=new')
-
-        elif browser_name == 'firefox':
-            options = FFOptions()
-            options.add_argument('--width=1920')
-            options.add_argument('--height=1080')
-
-            if not headed:
-                options.add_argument('--headless')
-
-        else:
-            raise ValueError(f'Unsupported browser: {browser_name}')
+        options.set_capability('browserVersion', browser_version)
+        options.set_capability('selenoid:options', {
+            'enableVNC': True,
+            'enableVideo': False,
+            'sessionTimeout': '5m'
+        })
 
         driver = webdriver.Remote(
-            command_executor='http://selenium-chrome:4444/wd/hub',
+            command_executor=executor_url,
             options=options
         )
-        logger.info(f'Remote session created successfully at {executor_url}')
+        logger.info(f'Remote session created at {executor_url}')
 
-    else:
-        logger.info(f'Creating local driver: {browser_name}')
+    elif executor == 'local':
+        # ===== Локальный запуск =====
+        logger.info(f'Starting local {browser_name}')
 
         if browser_name == 'chrome':
-            options = ChromeOptions()
-            if not headed:
-                options.add_argument('--headless')
-            options.add_argument('--no-sandbox')
-            options.add_argument('--disable-dev-shm-usage')
-            options.add_argument('--disable-gpu')
-            options.add_argument('--window-size=1920,1080')
-            options.add_argument('--disable-notifications')
-            options.add_argument('--disable-popup-blocking')
-
             driver = webdriver.Chrome(options=options)
-
         elif browser_name == 'firefox':
-            options = FFOptions()
-            if not headed:
-                options.add_argument('--headless')
-            options.add_argument('--width=1920')
-            options.add_argument('--height=1080')
+            driver = webdriver.Firefox(options=options)
 
-            if '24.04' in platform.version():
-                service = FFService(executable_path="/snap/bin/geckodriver")
-            else:
-                service = FFService()
-            driver = webdriver.Firefox(options=options, service=service)
-        else:
-            driver = webdriver.Safari()
+        logger.info(f'Local driver created: {browser_name}')
+
+    else:
+        raise ValueError(f'Unknown executor: {executor}. Use "local" or "selenoid"')
 
     driver.maximize_window()
     driver.url = url
     driver.implicitly_wait(10)
 
-    logger.info(f'Проверка доступности PrestaShop по адресу {url}')
+    # Проверка доступности PrestaShop
+    logger.info(f'Checking PrestaShop at {url}')
     max_attempts = 30
     for attempt in range(max_attempts):
         try:
             driver.get(url)
             time.sleep(2)
             if 'PrestaShop' in driver.title or 'prestashop' in driver.title.lower():
-                logger.info(f'PrestaShop доступен: {driver.title}')
+                logger.info(f'PrestaShop available: {driver.title}')
                 break
         except Exception as e:
-            logger.info(f'Попытка {attempt + 1}/{max_attempts}: {str(e)[:50]}...')
+            logger.info(f'Attempt {attempt + 1}/{max_attempts}: {str(e)[:50]}...')
             time.sleep(2)
     else:
-        logger.error(f'PrestaShop не доступен после {max_attempts} попыток')
+        logger.error(f'PrestaShop not available after {max_attempts} attempts')
 
     logger.info(f'Opened {url} in {browser_name}')
     logger.info(f'Page title: {driver.title}')
@@ -142,3 +134,8 @@ def browser(request):
     driver.quit()
     file_handler.close()
     logger.removeHandler(file_handler)
+
+
+@pytest.fixture(scope='function')
+def base_url(request):
+    return request.config.getoption('--url')

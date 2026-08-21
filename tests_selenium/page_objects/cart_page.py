@@ -17,7 +17,7 @@ class CartPage(BasePage):
 
     @allure.step('Добавить продукт в корзину')
     def add_to_cart(self):
-        self.browser.get('http://prestashop:80/men/1-hummingbird-printed-t-shirt.html')
+        self.browser.get(f'{self.browser.url}/men/1-hummingbird-printed-t-shirt.html')
         self.find(self.ADD_TO_CART_BUTTON).click()
 
     @allure.step('Закрыть модальное окно корзины')
