@@ -10,7 +10,7 @@ class CartPage(BasePage):
     ADD_TO_CART_FROM_MAIN_PAGE = (By.CSS_SELECTOR, 'button.add-to-cart')
     ITEM_TO_CART = (By.CSS_SELECTOR, '.cart-products-count')
     CART_ITEM = (By.CSS_SELECTOR, '.cart-products-count')
-    MODAL_WIDOW_CLOSE_BUTTON = (By.XPATH, "//div[@id='blockcart-modal']//button[@data-dismiss='modal']/span/i")
+    MODAL_WINDOW_CLOSE_BUTTON = (By.XPATH, "//div[@id='blockcart-modal']//button[@data-dismiss='modal']/span/i")
     CART_LABEL = (By.CSS_SELECTOR, '#_desktop_cart .hidden-sm-down')
     DELETE_BUTTON = (By.CSS_SELECTOR, "a[data-link-action='delete-from-cart']")
     SUBTOTAL_ZERO_CHECK = (By.CSS_SELECTOR, '#cart-subtotal-products .label.js-subtotal')
@@ -22,11 +22,18 @@ class CartPage(BasePage):
 
     @allure.step('Закрыть модальное окно корзины')
     def close_cart_modal(self):
-        return self.click(self.MODAL_WIDOW_CLOSE_BUTTON)
+        try:
+            self.click(self.MODAL_WINDOW_CLOSE_BUTTON)
+            self.wait_invisible(self.MODAL_WINDOW_CLOSE_BUTTON)
+            return True
+        except:
+            return False
 
     @allure.step('Перейти к корзине')
     def open_cart(self):
+        self.close_cart_modal()
         return self.click(self.CART_LABEL)
+
 
     @allure.step('Продукт находится в корзине')
     def is_product_in_cart(self):

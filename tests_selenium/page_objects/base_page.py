@@ -77,5 +77,9 @@ class BasePage:
     def is_visible(self, locator) -> bool:
         return self.wait_visible(locator).is_displayed()
 
+    @allure.step('Ожидать невидимость {locator}')
+    def wait_invisible(self, locator):
+        return self.wait.until(EC.invisibility_of_element_located(locator))
+
 
 
