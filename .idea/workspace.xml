@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1015209f-1887-4691-a9a7-3438acc004ed" name="Changes" comment="Jenkins" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;alinaermilova17&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/alinaermilova17/OTUS-Auto-web-QA-2026-SELENIUM.git&quot;,
+    &quot;accountId&quot;: &quot;ec61f735-cc2f-4352-acd9-629924e6e4af&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;alinaermilova17&quot;,
+    &quot;repository&quot;: &quot;OTUS-Auto-web-QA-2026-SELENIUM&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="3EBVwaSLdXw2RKZffbpqlw0rMFX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Allure Tests.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests_2.tests.test_find_element_by.test_catalog_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests_2.tests.test_find_element_by.test_main_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests_2.tests.test_find_element_by.test_product_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests_2.tests.test_find_element_by.test_register_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_catalog_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_login_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_main_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_product_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_register_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_add_to_cart.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_check.py.executor&quot;: &quot;Debug&quot;,
+    &quot;Python tests.Python tests in test_delete_item_from_cart.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_diagnostic.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_find_element_by.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_find_elements_by.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_login_logout.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_opecart.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_opencart.py.executor&quot;: &quot;Debug&quot;,
+    &quot;Python tests.Python tests in test_prestashop.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_register.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_swiith_currency_catalog.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_swiith_currency_main_page.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.admin_login_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python.login_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python.product_page.executor&quot;: &quot;Run&quot;,
+    &quot;Python.register_page.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;jenkins&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sereg/PycharmProjects/OTUS-Auto-web-QA-2026-SELENIUM/tests_selenium/page_objects&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_selenium\page_objects" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_2\tests" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_selenium" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_selenium\" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_selenium\Presta_shop" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python tests.Python tests in test_find_elements_by.py">
+    <configuration name="Allure Tests" type="tests" factoryName="py.test">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.14 (OTUS-Auto-web-QA-2026-SELENIUM)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;--alluredir\u003dallure-results -v&quot;" />
+      <option name="_new_target" value="&quot;tests_selenium/tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_add_to_cart.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests_selenium/tests/test_add_to_cart.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_find_elements_by.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests_selenium/tests/test_find_elements_by.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_login_logout.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests_selenium/tests/test_login_logout.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_swiith_currency_catalog.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests_selenium/tests/test_swiith_currency_catalog.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_swiith_currency_main_page.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests_selenium/tests/test_swiith_currency_main_page.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python tests.Allure Tests" />
+      <item itemvalue="Python tests.Python tests in test_find_elements_by.py" />
+      <item itemvalue="Python tests.Python tests in test_add_to_cart.py" />
+      <item itemvalue="Python tests.Python tests in test_login_logout.py" />
+      <item itemvalue="Python tests.Python tests in test_swiith_currency_catalog.py" />
+      <item itemvalue="Python tests.Python tests in test_swiith_currency_main_page.py" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests in test_swiith_currency_main_page.py" />
+        <item itemvalue="Python tests.Python tests in test_swiith_currency_catalog.py" />
+        <item itemvalue="Python tests.Python tests in test_login_logout.py" />
+        <item itemvalue="Python tests.Python tests in test_add_to_cart.py" />
+        <item itemvalue="Python tests.Python tests in test_find_elements_by.py" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-4e2b1448bda8-9a97661f3031-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.27397.106" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1015209f-1887-4691-a9a7-3438acc004ed" name="Changes" comment="" />
+      <created>1779652188556</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1779652188556</updated>
+    </task>
+    <task id="LOCAL-00001" summary="selenium/поиск элементов/ожидание элементов PrestaShop">
+      <option name="closed" value="true" />
+      <created>1780337450029</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1780337450029</updated>
+    </task>
+    <task id="LOCAL-00002" summary="selenium/поиск элементов/ожидание элементов PrestaShop">
+      <option name="closed" value="true" />
+      <created>1780575092773</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1780575092773</updated>
+    </task>
+    <task id="LOCAL-00003" summary="page_object">
+      <option name="closed" value="true" />
+      <created>1782732537384</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1782732537384</updated>
+    </task>
+    <task id="LOCAL-00004" summary="page_object">
+      <option name="closed" value="true" />
+      <created>1782845583708</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1782845583708</updated>
+    </task>
+    <task id="LOCAL-00005" summary="page_object">
+      <option name="closed" value="true" />
+      <created>1782935393352</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1782935393352</updated>
+    </task>
+    <task id="LOCAL-00006" summary="logging and allure">
+      <option name="closed" value="true" />
+      <created>1784376351933</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1784376351933</updated>
+    </task>
+    <task id="LOCAL-00007" summary="docker_homework">
+      <option name="closed" value="true" />
+      <created>1784920753884</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1784920753884</updated>
+    </task>
+    <task id="LOCAL-00008" summary="selenoid(selenium-grid)_homework">
+      <option name="closed" value="true" />
+      <created>1785703677984</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1785703677984</updated>
+    </task>
+    <task id="LOCAL-00009" summary="selenoid(selenium-grid)_homework">
+      <option name="closed" value="true" />
+      <created>1786485579991</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1786485579991</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Jenkins">
+      <option name="closed" value="true" />
+      <created>1787585291864</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1787585291864</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="778eb924-5406-46a2-94ed-b03527e666f4" value="TOOL_WINDOW" />
+        <entry key="882d602c-dfbe-4043-97d3-4fb8d648e051" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="778eb924-5406-46a2-94ed-b03527e666f4">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="882d602c-dfbe-4043-97d3-4fb8d648e051">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/hw1" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="selenium/поиск элементов/ожидание элементов PrestaShop" />
+    <MESSAGE value="page_object" />
+    <MESSAGE value="logging and allure (#3)" />
+    <MESSAGE value="logging and allure" />
+    <MESSAGE value="docker_homework" />
+    <MESSAGE value="selenoid(selenium-grid)_homework" />
+    <MESSAGE value="Jenkins" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jenkins" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests_selenium/pages_i/home_page.py</url>
+          <line>111</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests_selenium/pages_i/home_page.py</url>
+          <line>99</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
