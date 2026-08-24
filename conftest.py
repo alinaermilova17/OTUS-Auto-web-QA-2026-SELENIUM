@@ -53,7 +53,7 @@ def browser(request):
     logger.info(f'Browser: {browser_name}, Version: {browser_version}, '
                 f'Headed: {headed}, Executor: {executor}, URL: {url}')
 
-    # Общие настройки для всех браузеров
+
     if browser_name == 'chrome':
         options = ChromeOptions()
         options.add_argument('--no-sandbox')
@@ -90,7 +90,7 @@ def browser(request):
         logger.info(f'Remote session created at {executor_url}')
 
     elif executor == 'local':
-        # ===== Локальный запуск =====
+
         logger.info(f'Starting local {browser_name}')
 
         if browser_name == 'chrome':
@@ -107,7 +107,7 @@ def browser(request):
     driver.url = url
     driver.implicitly_wait(10)
 
-    # Проверка доступности PrestaShop
+
     logger.info(f'Checking PrestaShop at {url}')
     max_attempts = 30
     for attempt in range(max_attempts):
