@@ -4,7 +4,6 @@ networks:
     external: true
 
 services:
-
   selenium-hub:
     image: selenium/hub:latest
     container_name: selenium-hub
@@ -106,7 +105,7 @@ services:
       - ./logs:/app/logs
       - ./reports:/app/reports
       - ./screenshots:/app/screenshots
-    entrypoint: [ 'pytest' ]
+    entrypoint: ['pytest']
     command: [
       'tests_selenium/tests/',
       '-v',
@@ -119,6 +118,36 @@ services:
     networks:
       - default
 
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+    container_name: jenkins
+    restart: unless-stopped
+    privileged: true
+    user: root
+    ports:
+      - "8088:8080"
+      - "50000:50000"
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - ./tests_selenium:/app/tests_selenium
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+      - ./screenshots:/app/screenshots
+    networks:
+      - default
+    depends_on:
+      selenium-hub:
+        condition: service_started
+      prestashop:
+        condition: service_healthy
+
 volumes:
   dbdata:
   psdata:
+  jenkins_home:
