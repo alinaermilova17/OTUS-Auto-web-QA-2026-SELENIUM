@@ -20,7 +20,7 @@ pipeline {
                     echo "=== Установка зависимостей ==="
                     pip3 install --break-system-packages pytest pytest-xdist allure-pytest selenium requests python-dotenv faker
 
-                    echo "=== Создание .env ==="
+                    echo "=== Создание .env в tests_selenium ==="
                     cat > tests_selenium/.env << 'EOF'
 BASE_URL=http://prestashop:80
 LOGIN=demo@prestashop.com
@@ -41,18 +41,15 @@ EOF
             steps {
                 sh '''
                     echo "=== Запуск тестов ==="
-                    echo "Содержимое проекта:"
-                    ls -la
-
-                    if [ -d "tests_selenium" ]; then
-                        cd tests_selenium
-                        mkdir -p allure-results
-                        python3 -m pytest tests/ -v --alluredir=allure-results
-                    else
-                        echo "❌ tests_selenium не найдена"
-                        find . -name "test_*.py" -type f
-                        exit 1
-                    fi
+                    cd tests_selenium
+                    mkdir -p allure-results
+                    python3 -m pytest tests/ -v \
+                        --executor=selenoid \
+                        --executor_url=http://selenium-hub:4444/wd/hub \
+                        --browser=chrome \
+                        --browser_version=150.0 \
+                        --url=http://prestashop:80 \
+                        --alluredir=allure-results -n 2
                 '''
             }
         }
