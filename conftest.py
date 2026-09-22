@@ -33,7 +33,7 @@ def browser(request):
     logger = logging.getLogger(__name__)
 
     if not os.path.exists('logs'):
-        os.makedirs('logs')
+        os.makedirs('logs',exist_ok=True)
 
     file_handler = logging.FileHandler(f'logs/{request.node.name}.log')
     file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
