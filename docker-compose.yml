@@ -153,3 +153,5 @@ volumes:
   dbdata:
   psdata:
   jenkins_home:
+    external: true
+    name: jenkins_home
