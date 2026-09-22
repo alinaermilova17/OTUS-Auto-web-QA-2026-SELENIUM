@@ -21,7 +21,7 @@ pipeline {
                     pip3 install --break-system-packages pytest pytest-xdist allure-pytest selenium requests python-dotenv faker
 
                     echo "=== Создание .env ==="
-                    cat > .env << 'EOF'
+                    cat > tests_selenium/.env << 'EOF'
 BASE_URL=http://prestashop:80
 LOGIN=demo@prestashop.com
 PASSWORD=prestashop_demo
@@ -32,7 +32,7 @@ EXECUTOR_URL=http://selenium-hub:4444/wd/hub
 EOF
 
                     echo "=== Проверка .env ==="
-                    cat .env
+                    cat tests_selenium/.env
                 '''
             }
         }
