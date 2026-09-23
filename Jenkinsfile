@@ -12,16 +12,16 @@ pipeline {
         stage('Setup Environment') {
             steps {
                 sh '''
-                    echo "=== Проверка окружения ==="
+                    echo === Проверка окружения ===
                     python3 --version
                     pip3 --version
                     allure --version
 
-                    echo "=== Установка зависимостей ==="
+                    echo === Установка зависимостей ===
                     pip3 install --break-system-packages pytest pytest-xdist allure-pytest selenium requests python-dotenv faker
 
-                    echo "=== Создание .env в tests_selenium ==="
-                    cat > tests_selenium/.env << 'EOF'
+                    echo === Создание .env в tests_selenium ===
+                    cat > tests_selenium/.env <<EOF
 BASE_URL=http://prestashop:8081
 LOGIN=demo@prestashop.com
 PASSWORD=prestashop_demo
@@ -31,7 +31,7 @@ EXECUTOR=selenoid
 EXECUTOR_URL=http://selenium-hub:4444/wd/hub
 EOF
 
-                    echo "=== Проверка .env ==="
+                    echo === Проверка .env ===
                     cat tests_selenium/.env
                 '''
             }
@@ -40,7 +40,7 @@ EOF
         stage('Run Tests') {
             steps {
                 sh '''
-                    echo "=== Запуск тестов ==="
+                    echo === Запуск тестов ===
                     cd tests_selenium
                     mkdir -p allure-results
                     python3 -m pytest tests/ -v \
@@ -54,31 +54,32 @@ EOF
             }
         }
 
-        stage('Allure Report') {
-            steps {
-                script {
-                    allure([
-                        includeProperties: false,
-                        jdk: '',
-                        properties: [],
-                        reportBuildPolicy: 'ALWAYS',
-                        results: [[path: 'tests_selenium/allure-results']]
-                    ])
-                }
-            }
-        }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: '**/allure-results/*', allowEmptyArchive: true
+            script {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'tests_selenium/allure-results']]
+                ])
+            }
+
+            archiveArtifacts artifacts: 'tests_selenium/allure-results/**', allowEmptyArchive: true
+
             cleanWs()
         }
         success {
             echo '✅ Тесты успешно завершены!'
         }
         failure {
-            echo '❌ Тесты завершились с ошибками.'
+            echo '❌ Тесты завершились с ошибками. Смотри Allure-отчёт.'
+        }
+        unstable {
+            echo '⚠️ Тесты нестабильны. Смотри Allure-отчёт.'
         }
     }
 }
