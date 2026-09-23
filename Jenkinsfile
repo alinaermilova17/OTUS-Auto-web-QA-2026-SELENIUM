@@ -22,7 +22,7 @@ pipeline {
 
                     echo "=== Создание .env в tests_selenium ==="
                     cat > tests_selenium/.env << 'EOF'
-BASE_URL=http://prestashop:80
+BASE_URL=http://prestashop:8081
 LOGIN=demo@prestashop.com
 PASSWORD=prestashop_demo
 BROWSER=chrome
@@ -48,7 +48,7 @@ EOF
                         --executor_url=http://selenium-hub:4444/wd/hub \
                         --browser=chrome \
                         --browser_version=150.0 \
-                        --url=http://prestashop:80 \
+                        --url=http://prestashop:8081 \
                         --alluredir=allure-results -n 2
                 '''
             }
