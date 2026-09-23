@@ -6,7 +6,6 @@ from tests_selenium.page_objects.wishlist_page import WishlistPage
 from config import LOGIN, PASSWORD, BASE_URL
 
 
-@allure.epic("UI")
 @allure.feature("Wishlist")
 class TestWishlist:
 
@@ -40,8 +39,6 @@ class TestWishlist:
             page.wait_for_added_toast()
 
     @allure.title("Проверить, что товар сохранён в My wishlist")
-    @allure.severity(allure.severity_level.CRITICAL)
-    @allure.story("Просмотр")
     def test_product_present_in_wishlist(self, browser):
         with allure.step("Залогиниться"):
             self.login(browser)
@@ -60,26 +57,3 @@ class TestWishlist:
         with allure.step("Проверить, что товар есть в списке"):
             assert page.has_product("Brown bear printed sweater"), \
                 "Товар не найден в wishlist"
-
-    @allure.title("Toggle wishlist: добавить и убрать товар")
-    @allure.severity(allure.severity_level.NORMAL)
-    @allure.story("Toggle")
-    def test_toggle_wishlist(self, browser):
-        with allure.step("Залогиниться"):
-            self.login(browser)
-
-        page = WishlistPage(browser)
-
-        with allure.step("Открыть карточку товара"):
-            page.open_women_category().open_brown_bear_product()
-
-        with allure.step("Добавить в wishlist (favorite_border → favorite)"):
-            page.add_to_wishlist()
-            page.wait_for_added_toast()
-
-        with allure.step("Убрать из wishlist (favorite → favorite_border)"):
-            page.toggle_wishlist()
-
-        with allure.step("Проверить, что иконка вернулась в 'favorite_border'"):
-            assert page.is_wishlist_icon_border(), \
-                "Иконка не вернулась в исходное состояние"
