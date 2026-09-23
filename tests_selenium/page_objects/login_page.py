@@ -19,7 +19,7 @@ class LoginPage(BasePage):
 
     @allure.step("Ввести пароль: {password}")
     def enter_password(self, password: str):
-        return self.find(self.PASSWORD_INPUT).send_keys(password)
+        return self.find(self.PASSWORD_INPUT).send_keys(pasword)
 
     @allure.step("Кликнуть кнопку логина")
     def click_login(self):
