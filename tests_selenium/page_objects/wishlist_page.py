@@ -7,9 +7,7 @@ from tests_selenium.page_objects.base_page import BasePage
 class WishlistPage(BasePage):
     CLOTHES_MENU = (By.XPATH, "//li[@id='category-3']//a[contains(@class,'dropdown-item')]")
     WOMEN_LINK   = (By.XPATH, "//ul[contains(@class,'category-sub-menu')]//a[normalize-space()='Women']")
-    PRODUCT_BROWN_BEAR = (    By.XPATH,
-    "//h3[contains(@class,'product-title')]//a[contains(text(),'Brown bear printed sweater')]"
-)
+    PRODUCT_BROWN_BEAR = (By.CSS_SELECTOR,"#js-product-list article.product-miniature a.product-thumbnail")
     PRODUCT_TITLE   = (By.CSS_SELECTOR, "h1.h1")
     WISHLIST_BUTTON = (By.CSS_SELECTOR, "button.wishlist-button-add")
     WISHLIST_ICON   = (By.CSS_SELECTOR, "button.wishlist-button-add i")
