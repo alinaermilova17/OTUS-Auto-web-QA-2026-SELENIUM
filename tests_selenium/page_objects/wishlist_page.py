@@ -58,7 +58,10 @@ class WishlistPage(BasePage):
     @allure.step("Проверить, что открыт товар '{title}'")
     def is_product_opened(self, title: str) -> bool:
         el = self.wait_visible(self.PRODUCT_TITLE, timeout=15)
-        return title.lower() in el.text.lower()
+        actual = " ".join(el.text.lower().split())
+        expected = " ".join(title.lower().split())
+        allure.attach(actual, "Фактический h1", allure.attachment_type.TEXT)
+        return expected in actual
 
     @allure.step("Проверить, что товар '{title}' есть в wishlist")
     def has_product(self, title: str) -> bool:
