@@ -1,10 +1,12 @@
+import allure
+
 from config import BASE_URL, LOGIN, PASSWORD
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.catalog_page import CatalogPage
 from tests_selenium.page_objects.main_page import MainPage
 from tests_selenium.page_objects.login_page import LoginPage
 
-
+@allure.title("Проверка переключения валют")
 def test_switch_currency_catalog(browser):
     login_page = LoginPage(browser)
     home_page = HomePage(browser)

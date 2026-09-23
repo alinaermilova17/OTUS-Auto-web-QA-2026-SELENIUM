@@ -1,3 +1,4 @@
+import allure
 from faker import Faker
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.register_page import RegisterPage
@@ -5,7 +6,7 @@ from config import BASE_URL
 
 fake = Faker('en_US')
 
-
+@allure.title("Проверка регистрации пользователя")
 def generate_user_data():
     return {
         'firstname': fake.first_name(),

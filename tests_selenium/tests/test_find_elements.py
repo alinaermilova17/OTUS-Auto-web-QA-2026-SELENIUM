@@ -1,3 +1,5 @@
+import allure
+
 from tests_selenium.page_objects.login_page import LoginPage
 from tests_selenium.page_objects.register_page import RegisterPage
 from tests_selenium.page_objects.main_page import MainPage
@@ -5,7 +7,7 @@ from tests_selenium.page_objects.product_page import ProductPage
 from tests_selenium.page_objects.catalog_page import CatalogPage
 from config import BASE_URL
 
-
+@allure.title("Проверка элементов на странице")
 def test_login_page(browser):
     login_page = LoginPage(browser)
     login_page.open(f'{BASE_URL}/login')

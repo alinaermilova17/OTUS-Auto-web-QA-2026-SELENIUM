@@ -1,9 +1,11 @@
+import allure
+
 from tests_selenium.page_objects.cart_page import CartPage
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.login_page import LoginPage
 from config import LOGIN, PASSWORD, BASE_URL
 
-
+@allure.title("Проверка удаления товара из корзины")
 def test_delete_from_cart(browser):
     login_page = LoginPage(browser)
     home_page = HomePage(browser)

@@ -1,8 +1,9 @@
+import allure
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.login_page import LoginPage
 from config import LOGIN, PASSWORD, BASE_URL
 
-
+@allure.title("Проверка страницы логина")
 def test_login_logout(browser):
     login_page = LoginPage(browser)
     home_page = HomePage(browser)

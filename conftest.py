@@ -1,4 +1,6 @@
 import platform
+
+import allure
 import pytest
 import datetime
 import time
@@ -9,6 +11,34 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FFOptions
 
 log_level = "DEBUG"
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+        browser = item.funcargs.get("browser")   # ← ваша фикстура
+        if browser is not None:
+            try:
+                allure.attach(
+                    browser.get_screenshot_as_png(),
+                    name=f"screenshot_{item.name}",
+                    attachment_type=allure.attachment_type.PNG
+                )
+                allure.attach(
+                    browser.page_source,
+                    name=f"page_source_{item.name}",
+                    attachment_type=allure.attachment_type.HTML
+                )
+                allure.attach(
+                    browser.current_url,
+                    name=f"url_{item.name}",
+                    attachment_type=allure.attachment_type.TEXT
+                )
+            except Exception as e:
+                print(f"Не удалось прикрепить скриншот для {item.name}: {e}")
 
 
 def pytest_addoption(parser):
