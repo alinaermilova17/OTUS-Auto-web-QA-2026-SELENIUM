@@ -1,4 +1,3 @@
-# tests_selenium/page_objects/wishlist_page.py
 import allure
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -6,24 +5,18 @@ from tests_selenium.page_objects.base_page import BasePage
 
 
 class WishlistPage(BasePage):
-    # Меню категорий
     CLOTHES_MENU = (By.XPATH, "//li[@id='category-3']//a[contains(@class,'dropdown-item')]")
     WOMEN_LINK   = (By.XPATH, "//ul[contains(@class,'category-sub-menu')]//a[normalize-space()='Women']")
-
-    # Карточка товара в каталоге
-    PRODUCT_BROWN_BEAR = (By.CSS_SELECTOR, "img[alt='Brown bear printed sweater']")
-
-    # Страница товара
+    PRODUCT_BROWN_BEAR = (    By.XPATH,
+    "//h3[contains(@class,'product-title')]//a[contains(text(),'Brown bear printed sweater')]"
+)
     PRODUCT_TITLE   = (By.CSS_SELECTOR, "h1.h1")
     WISHLIST_BUTTON = (By.CSS_SELECTOR, "button.wishlist-button-add")
     WISHLIST_ICON   = (By.CSS_SELECTOR, "button.wishlist-button-add i")
     WISHLIST_TOAST  = (By.CSS_SELECTOR, ".wishlist-toast.success")
 
-    # Мой wishlist
     MY_WISHLIST_LINK = (By.CSS_SELECTOR, "a[title='My wishlists'], a[href*='blockwishlist']")
     WISHLIST_ITEM    = (By.CSS_SELECTOR, ".wishlist-list-item-title, .wishlist-list-item")
-
-    # ───── Actions ─────
 
     @allure.step("Открыть категорию Clothes → Women")
     def open_women_category(self):
@@ -61,8 +54,6 @@ class WishlistPage(BasePage):
         self.click(self.MY_WISHLIST_LINK)
         self.click(self.WISHLIST_ITEM)
         return self
-
-    # ───── Checks ─────
 
     @allure.step("Проверить, что открыт товар '{title}'")
     def is_product_opened(self, title: str) -> bool:
