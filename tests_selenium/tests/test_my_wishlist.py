@@ -10,22 +10,18 @@ from config import LOGIN, PASSWORD, BASE_URL
 @allure.feature("Wishlist")
 class TestWishlist:
 
-    # ─────────── helper ───────────
-
-    def _login(self, browser):
-        """Общий шаг: логин через LoginPage, проверка через HomePage."""
-        LoginPage(browser).open(f"{BASE_URL}/login?back=my-account") \
-                          .login(LOGIN, PASSWORD)
+    def login(self, browser):
+        login_page = LoginPage(browser)
+        login_page.open(f"{BASE_URL}/login?back=my-account")
+        login_page.login(LOGIN, PASSWORD)
         assert HomePage(browser).is_user_logged_in(), "Пользователь не залогинен"
-
-    # ─────────── tests ───────────
 
     @allure.title("Добавить товар 'Brown bear printed sweater' в wishlist")
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.story("Добавление")
     def test_add_product_to_wishlist(self, browser):
         with allure.step("Залогиниться"):
-            self._login(browser)
+            self.login(browser)
 
         page = WishlistPage(browser)
 
@@ -48,7 +44,7 @@ class TestWishlist:
     @allure.story("Просмотр")
     def test_product_present_in_wishlist(self, browser):
         with allure.step("Залогиниться"):
-            self._login(browser)
+            self.login(browser)
 
         page = WishlistPage(browser)
 
@@ -70,7 +66,7 @@ class TestWishlist:
     @allure.story("Toggle")
     def test_toggle_wishlist(self, browser):
         with allure.step("Залогиниться"):
-            self._login(browser)
+            self.login(browser)
 
         page = WishlistPage(browser)
 

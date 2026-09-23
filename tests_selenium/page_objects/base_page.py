@@ -14,7 +14,7 @@ class BasePage:
     @allure.step('Открыть страницу: {url}')
     def open(self, url):
         self.logger.info('| Class: %s | Opening url: %s' % (self.class_name, url))
-        return self
+        return self.browser.get(url)
 
     @allure.step('Найти элемент: {locator}')
     def find(self, locator):
