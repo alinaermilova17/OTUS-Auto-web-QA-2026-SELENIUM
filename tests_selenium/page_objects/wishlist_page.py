@@ -1,4 +1,3 @@
-# tests_selenium/page_objects/wishlist_page.py
 import allure
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -8,39 +7,31 @@ from tests_selenium.page_objects.base_page import BasePage
 
 class WishlistPage(BasePage):
 
-    # ───── Меню категорий ─────
+    # Меню
     CLOTHES_MENU = (By.XPATH, "//li[@id='category-3']//a[contains(@class,'dropdown-item')]")
     WOMEN_LINK   = (By.XPATH, "//ul[contains(@class,'category-sub-menu')]//a[normalize-space()='Women']")
 
-    # ───── Карточка товара ─────
+    # Карточка конкретного товара
     PRODUCT_BROWN_BEAR = (
         By.CSS_SELECTOR,
-        "#js-product-list article.product-miniature a.product-thumbnail"
+        "a[href*='brown-bear-printed-sweater']"
     )
 
-    # ───── Кнопка wishlist на странице товара ─────
+    # Кнопка wishlist на странице товара
     WISHLIST_BUTTON = (By.CSS_SELECTOR, "button.wishlist-button-add")
 
-    # ───── Модалка wishlist ─────
-    WISHLIST_MODAL = (By.CSS_SELECTOR, ".wishlist-modal.modal.fade.show, .wishlist-modal.modal.fade")
-
-    # ← локатор, который вы дали: первый <p> в списке внутри модалки
+    # Модалка + пункт внутри
+    WISHLIST_MODAL = (By.CSS_SELECTOR, ".wishlist-modal.modal.show, .wishlist-modal.modal.fade.show")
     WISHLIST_MODAL_ITEM = (
         By.CSS_SELECTOR,
-        "#footer .wishlist-modal .modal-body ul li p"
+        ".wishlist-modal.modal.show .modal-body ul li p, "
+        ".wishlist-modal.modal.fade.show .modal-body ul li p"
     )
 
-    # ───── Футер ─────
-    MY_WISHLIST_FOOTER = (By.CSS_SELECTOR, "#footer_account_list > li:nth-child(5) > a")
-
-    # ───── Страница wishlist ─────
+    # Футер и страница wishlist
+    MY_WISHLIST_FOOTER   = (By.CSS_SELECTOR, "#footer_account_list > li:nth-child(5) > a")
     WISHLIST_LIST_FIRST  = (By.CSS_SELECTOR, "#content > div > ul > li > a > p")
-    WISHLIST_PRODUCT_IMG = (
-        By.CSS_SELECTOR,
-        "#content > ul > li > div > a > div.wishlist-product-image > img"
-    )
-
-    # ───────── Actions ─────────
+    WISHLIST_PRODUCT_IMG = (By.CSS_SELECTOR, "#content > ul > li > div > a > div.wishlist-product-image > img")
 
     @allure.step("Открыть Clothes → Women")
     def open_women_category(self):
@@ -59,24 +50,20 @@ class WishlistPage(BasePage):
         allure.attach(url, "current url", allure.attachment_type.TEXT)
         return "brown-bear-printed-sweater" in url
 
-    @allure.step("Добавить в wishlist через кнопку + модалку")
+    @allure.step("Добавить в wishlist")
     def add_to_wishlist(self):
-        # 1. Клик по кнопке wishlist (НЕ по Add to cart!)
+        # 1. клик по кнопке wishlist
         self.click(self.WISHLIST_BUTTON)
 
-        # 2. Ждём модалку выбора списка
+        # 2. ждём PRESENCE (а не visibility) — модалка появляется с анимацией
         try:
-            self.wait_visible(self.WISHLIST_MODAL, timeout=10)
-
-            # 3. Клик по первому списку в модалке
-            self.click(self.WISHLIST_MODAL_ITEM)
-
-            # 4. Ждём, что модалка закрылась
-            self.wait.until(
-                EC.invisibility_of_element_located(self.WISHLIST_MODAL)
-            )
+            self.wait.until(EC.presence_of_element_located(self.WISHLIST_MODAL))
+            # 3. ждём кликабельности пункта внутри модалки
+            item = self.wait.until(EC.element_to_be_clickable(self.WISHLIST_MODAL_ITEM))
+            self.browser.execute_script("arguments[0].click();", item)
+            # 4. ждём закрытия
+            self.wait.until(EC.invisibility_of_element_located(self.WISHLIST_MODAL))
         except TimeoutException:
-            # модалки нет — товар уже был в wishlist, ничего не делаем
             allure.attach(
                 self.browser.get_screenshot_as_png(),
                 "modal_not_found",
@@ -98,19 +85,3 @@ class WishlistPage(BasePage):
     @allure.step("Проверить, что товар есть в wishlist")
     def has_product_in_wishlist(self) -> bool:
         return self.is_visible(self.WISHLIST_PRODUCT_IMG)
-
-    # ───────── Helpers ─────────
-
-    def _close_modal_if_present(self):
-        try:
-            modal = self.browser.find_element(*self.WISHLIST_MODAL)
-            if modal.is_displayed():
-                close_btn = modal.find_element(
-                    By.CSS_SELECTOR, "button.close, [data-dismiss='modal']"
-                )
-                self.browser.execute_script("arguments[0].click();", close_btn)
-                self.wait.until(
-                    EC.invisibility_of_element_located(self.WISHLIST_MODAL)
-                )
-        except Exception:
-            pass
