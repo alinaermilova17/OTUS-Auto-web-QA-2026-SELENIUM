@@ -2,6 +2,8 @@ import allure
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+
+from config import BASE_URL
 from tests_selenium.page_objects.base_page import BasePage
 
 
@@ -17,6 +19,7 @@ class WishlistPage(BasePage):
     MY_WISHLIST_FOOTER   = (By.CSS_SELECTOR, "#footer_account_list > li:nth-child(5) > a")
     WISHLIST_LIST_FIRST  = (By.CSS_SELECTOR, "#content > div > ul > li > a > p")
     WISHLIST_PRODUCT_IMG = (By.CSS_SELECTOR, "#content > ul > li > div > a > div.wishlist-product-image > img")
+    WISHLIST_ICON = (By.CSS_SELECTOR, "button.wishlist-button-add i")
 
     @allure.step("Открыть Clothes → Women")
     def open_women_category(self):
@@ -68,3 +71,40 @@ class WishlistPage(BasePage):
     @allure.step("Проверить, что товар есть в wishlist")
     def has_product_in_wishlist(self) -> bool:
         return self.is_visible(self.WISHLIST_PRODUCT_IMG)
+
+    @allure.step("Убедиться, что товар в wishlist")
+    def ensure_in_wishlist(self):
+        icon = self.find(self.WISHLIST_ICON)
+        classes = icon.get_attribute("class") or ""
+        allure.attach(classes, "icon class before", allure.attachment_type.TEXT)
+
+        if "favorite_border" in classes:
+            # товара нет — добавляем
+            allure.attach("adding to wishlist", "action", allure.attachment_type.TEXT)
+            self.click(self.WISHLIST_BUTTON)
+            self.wait.until(
+                lambda d: "favorite_border" not in (
+                        d.find_element(*self.WISHLIST_ICON).get_attribute("class") or ""
+                )
+            )
+        else:
+            # товар уже в wishlist — ничего не делаем
+            allure.attach("already in wishlist", "action", allure.attachment_type.TEXT)
+
+        return self
+
+    @allure.step("Очистить все wishlists")
+    def clear_all_wishlists(self):
+        self.browser.get(f"{BASE_URL}/module/blockwishlist/lists")
+        while True:
+            buttons = self.browser.find_elements(
+                "css selector", "a[href*='delete'], .wishlist-delete, button[data-action='delete']"
+            )
+            if not buttons:
+                break
+            buttons[0].click()
+            try:
+                self.browser.switch_to.alert.accept()
+            except Exception:
+                pass
+        return self

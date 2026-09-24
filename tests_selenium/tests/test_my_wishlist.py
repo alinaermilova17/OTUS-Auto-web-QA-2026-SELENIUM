@@ -18,9 +18,8 @@ class TestWishlist:
         login_page.login(LOGIN, PASSWORD)
         assert HomePage(browser).is_user_logged_in(), "Пользователь не залогинен"
 
+
     @allure.title("Добавить товар в wishlist")
-    @allure.severity(allure.severity_level.CRITICAL)
-    @allure.story("Добавление")
     def test_add_product_to_wishlist(self, browser):
         with allure.step("Залогиниться"):
             self._login(browser)
@@ -39,13 +38,14 @@ class TestWishlist:
             page.add_to_wishlist()
 
     @allure.title("Проверить, что товар сохранён в My wishlist")
-    @allure.severity(allure.severity_level.CRITICAL)
-    @allure.story("Просмотр")
     def test_product_present_in_wishlist(self, browser):
         with allure.step("Залогиниться"):
             self._login(browser)
 
         page = WishlistPage(browser)
+
+        with allure.step("Очистить wishlists"):
+            page.clear_all_wishlists()
 
         with allure.step("Открыть Clothes → Women"):
             page.open_women_category()
@@ -53,8 +53,8 @@ class TestWishlist:
         with allure.step("Открыть карточку товара"):
             page.open_brown_bear_product()
 
-        with allure.step("Добавить в wishlist через модалку"):
-            page.add_to_wishlist()
+        with allure.step("Убедиться, что товар в wishlist"):
+            page.ensure_in_wishlist()
 
         with allure.step("Перейти в My wishlists через футер"):
             page.open_my_wishlist()
@@ -63,5 +63,4 @@ class TestWishlist:
             page.open_first_wishlist()
 
         with allure.step("Проверить, что товар есть в wishlist"):
-            assert page.has_product_in_wishlist(), \
-                "Товар не найден в wishlist"
+            assert page.has_product_in_wishlist(), "Товар не найден в wishlist"
