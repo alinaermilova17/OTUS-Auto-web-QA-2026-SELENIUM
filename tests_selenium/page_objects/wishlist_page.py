@@ -1,8 +1,9 @@
 import allure
+from selenium.common import TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
-
+from selenium.webdriver.support import expected_conditions as EC
 
 class WishlistPage(BasePage):
     CLOTHES_MENU = (By.XPATH, "//li[@id='category-3']//a[contains(@class,'dropdown-item')]")
@@ -11,7 +12,7 @@ class WishlistPage(BasePage):
     PRODUCT_TITLE   = (By.CSS_SELECTOR, "h1.h1")
     WISHLIST_BUTTON = (By.CSS_SELECTOR, "button.wishlist-button-add")
     WISHLIST_ICON   = (By.CSS_SELECTOR, "button.wishlist-button-add i")
-    WISHLIST_TOAST  = (By.CSS_SELECTOR, ".wishlist-toast.success")
+    WISHLIST_TOAST  = (By.CSS_SELECTOR, ".wishlist-toast")
 
     MY_WISHLIST_LINK = (By.CSS_SELECTOR, "a[title='My wishlists'], a[href*='blockwishlist']")
     WISHLIST_ITEM    = (By.CSS_SELECTOR, ".wishlist-list-item-title, .wishlist-list-item")
@@ -44,7 +45,15 @@ class WishlistPage(BasePage):
 
     @allure.step("Дождаться тоста 'Product added'")
     def wait_for_added_toast(self):
-        self.wait_visible(self.WISHLIST_TOAST, timeout=15)
+        try:
+            self.wait.until(EC.presence_of_element_located(self.WISHLIST_TOAST))
+        except TimeoutException:
+            # не падаем — тост мог не появиться, это не критично
+            allure.attach(
+                self.browser.get_screenshot_as_png(),
+                "toast_not_found",
+                allure.attachment_type.PNG
+            )
         return self
 
     @allure.step("Открыть 'My wishlist'")

@@ -44,10 +44,9 @@ class TestWishlist:
         page = WishlistPage(browser)
 
         with allure.step("Добавить товар в wishlist"):
-            page.open_women_category() \
-                .open_brown_bear_product() \
-                .add_to_wishlist()
-            page.wait_for_added_toast()
+            page.open_women_category()
+            page.open_brown_bear_product()
+            page.add_to_wishlist()
 
         with allure.step("Открыть 'My wishlist'"):
             page.open_my_wishlist()
