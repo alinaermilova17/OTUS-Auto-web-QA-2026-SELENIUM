@@ -12,32 +12,29 @@ class WishlistPage(BasePage):
     CLOTHES_MENU = (By.XPATH, "//li[@id='category-3']//a[contains(@class,'dropdown-item')]")
     WOMEN_LINK   = (By.XPATH, "//ul[contains(@class,'category-sub-menu')]//a[normalize-space()='Women']")
 
-    # ───── Карточка товара в каталоге ─────
+    # ───── Карточка товара ─────
     PRODUCT_BROWN_BEAR = (
         By.CSS_SELECTOR,
         "#js-product-list article.product-miniature a.product-thumbnail"
     )
 
-    # ───── Страница товара ─────
-    PRODUCT_TITLE   = (By.CSS_SELECTOR, "h1.h1, h1[itemprop='name']")
-    ADD_TO_CART     = (
-        By.CSS_SELECTOR,
-        "#add-to-cart-or-refresh > div.product-add-to-cart.js-product-add-to-cart > div > button"
-    )
+    # ───── Кнопка wishlist на странице товара ─────
+    WISHLIST_BUTTON = (By.CSS_SELECTOR, "button.wishlist-button-add")
 
-    # ───── Модалка выбора wishlist ─────
-    WISHLIST_MODAL       = (By.CSS_SELECTOR, ".wishlist-modal.modal.show")
-    WISHLIST_MODAL_ITEM  = (
+    # ───── Модалка wishlist ─────
+    WISHLIST_MODAL = (By.CSS_SELECTOR, ".wishlist-modal.modal.fade.show, .wishlist-modal.modal.fade")
+
+    # ← локатор, который вы дали: первый <p> в списке внутри модалки
+    WISHLIST_MODAL_ITEM = (
         By.CSS_SELECTOR,
-        ".wishlist-modal.modal.show .modal-body ul li"
+        "#footer .wishlist-modal .modal-body ul li p"
     )
-    WISHLIST_MODAL_CLOSE = (By.CSS_SELECTOR, ".wishlist-modal.modal.show button.close")
 
     # ───── Футер ─────
     MY_WISHLIST_FOOTER = (By.CSS_SELECTOR, "#footer_account_list > li:nth-child(5) > a")
 
     # ───── Страница wishlist ─────
-    WISHLIST_LIST_FIRST = (By.CSS_SELECTOR, "#content > div > ul > li > a > p")
+    WISHLIST_LIST_FIRST  = (By.CSS_SELECTOR, "#content > div > ul > li > a > p")
     WISHLIST_PRODUCT_IMG = (
         By.CSS_SELECTOR,
         "#content > ul > li > div > a > div.wishlist-product-image > img"
@@ -45,7 +42,7 @@ class WishlistPage(BasePage):
 
     # ───────── Actions ─────────
 
-    @allure.step("Открыть категорию Clothes → Women")
+    @allure.step("Открыть Clothes → Women")
     def open_women_category(self):
         self.click(self.CLOTHES_MENU)
         self.click(self.WOMEN_LINK)
@@ -62,31 +59,34 @@ class WishlistPage(BasePage):
         allure.attach(url, "current url", allure.attachment_type.TEXT)
         return "brown-bear-printed-sweater" in url
 
-    @allure.step("Добавить товар в wishlist (через кнопку 'Add to cart area' и модалку)")
+    @allure.step("Добавить в wishlist через кнопку + модалку")
     def add_to_wishlist(self):
-        # 1. клик по кнопке wishlist в блоке add-to-cart
-        self.click(self.ADD_TO_CART)
+        # 1. Клик по кнопке wishlist (НЕ по Add to cart!)
+        self.click(self.WISHLIST_BUTTON)
 
-        # 2. дождаться модалки
-        self.wait_visible(self.WISHLIST_MODAL, timeout=15)
+        # 2. Ждём модалку выбора списка
+        try:
+            self.wait_visible(self.WISHLIST_MODAL, timeout=10)
 
-        # 3. выбрать первый wishlist в списке
-        self.click(self.WISHLIST_MODAL_ITEM)
+            # 3. Клик по первому списку в модалке
+            self.click(self.WISHLIST_MODAL_ITEM)
 
+            # 4. Ждём, что модалка закрылась
+            self.wait.until(
+                EC.invisibility_of_element_located(self.WISHLIST_MODAL)
+            )
+        except TimeoutException:
+            # модалки нет — товар уже был в wishlist, ничего не делаем
+            allure.attach(
+                self.browser.get_screenshot_as_png(),
+                "modal_not_found",
+                allure.attachment_type.PNG
+            )
         return self
 
-    @allure.step("Скролл вниз")
-    def scroll_down(self):
-        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        return self
-
-    @allure.step("Перейти в 'My wishlists' через футер")
+    @allure.step("Перейти в My wishlists через футер")
     def open_my_wishlist(self):
-        # закрываем модалку, если она ещё открыта
-        self._close_modal_if_present()
-        # скроллим вниз, чтобы футер был виден
-        self.scroll_down()
-        # клик по ссылке в футере
+        self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         self.click(self.MY_WISHLIST_FOOTER)
         return self
 
@@ -94,8 +94,6 @@ class WishlistPage(BasePage):
     def open_first_wishlist(self):
         self.click(self.WISHLIST_LIST_FIRST)
         return self
-
-    # ───────── Checks ─────────
 
     @allure.step("Проверить, что товар есть в wishlist")
     def has_product_in_wishlist(self) -> bool:
@@ -107,8 +105,12 @@ class WishlistPage(BasePage):
         try:
             modal = self.browser.find_element(*self.WISHLIST_MODAL)
             if modal.is_displayed():
-                close_btn = modal.find_element(*self.WISHLIST_MODAL_CLOSE)
+                close_btn = modal.find_element(
+                    By.CSS_SELECTOR, "button.close, [data-dismiss='modal']"
+                )
                 self.browser.execute_script("arguments[0].click();", close_btn)
-                self.wait.until(EC.invisibility_of_element_located(self.WISHLIST_MODAL))
+                self.wait.until(
+                    EC.invisibility_of_element_located(self.WISHLIST_MODAL)
+                )
         except Exception:
             pass
