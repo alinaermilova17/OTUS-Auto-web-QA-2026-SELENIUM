@@ -62,10 +62,9 @@ class WishlistPage(BasePage):
         self.click(self.WISHLIST_ITEM)
         return self
 
-    @allure.step("Проверить, что открыт товар '{title}'")
-    def is_product_opened(self):
-        self.wait_visible(self.PRODUCT_BROWN_BEAR, timeout=15)
-        return self
+    @allure.step("Проверить, что открыт товар")
+    def is_product_opened(self) -> bool:
+        return "brown-bear-printed-sweater" in self.browser.current_url
 
     @allure.step("Проверить, что товар '{title}' есть в wishlist")
     def has_product(self, title: str) -> bool:

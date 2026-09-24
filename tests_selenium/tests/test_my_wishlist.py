@@ -27,8 +27,7 @@ class TestWishlist:
 
         with allure.step("Открыть карточку 'Brown bear printed sweater'"):
             page.open_brown_bear_product()
-            assert page.is_product_opened(), \
-                "Открылась не та карточка товара"
+            assert page.is_product_opened(), "Открылась не та карточка товара"
 
         with allure.step("Добавить товар в wishlist"):
             page.add_to_wishlist()
