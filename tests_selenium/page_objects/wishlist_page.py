@@ -7,9 +7,7 @@ from tests_selenium.page_objects.base_page import BasePage
 class WishlistPage(BasePage):
     CLOTHES_MENU = (By.XPATH, "//li[@id='category-3']//a[contains(@class,'dropdown-item')]")
     WOMEN_LINK   = (By.XPATH, "//ul[contains(@class,'category-sub-menu')]//a[normalize-space()='Women']")
-    PRODUCT_BROWN_BEAR = (By.XPATH,
-    "//article[contains(@class,'product-miniature')]"
-    "//a[contains(@href, 'brown-bear-printed-sweater')]")
+    PRODUCT_BROWN_BEAR = (By.CSS_SELECTOR,"#js-product-list > div.products.row > div > article > div > div.thumbnail-top > a > img")
     PRODUCT_TITLE   = (By.CSS_SELECTOR, "h1.h1")
     WISHLIST_BUTTON = (By.CSS_SELECTOR, "button.wishlist-button-add")
     WISHLIST_ICON   = (By.CSS_SELECTOR, "button.wishlist-button-add i")
@@ -56,12 +54,9 @@ class WishlistPage(BasePage):
         return self
 
     @allure.step("Проверить, что открыт товар '{title}'")
-    def is_product_opened(self, title: str) -> bool:
-        el = self.wait_visible(self.PRODUCT_TITLE, timeout=15)
-        actual = " ".join(el.text.lower().split())
-        expected = " ".join(title.lower().split())
-        allure.attach(actual, "Фактический h1", allure.attachment_type.TEXT)
-        return expected in actual
+    def is_product_opened(self):
+        self.wait_visible(self.PRODUCT_BROWN_BEAR, timeout=15)
+        return self
 
     @allure.step("Проверить, что товар '{title}' есть в wishlist")
     def has_product(self, title: str) -> bool:

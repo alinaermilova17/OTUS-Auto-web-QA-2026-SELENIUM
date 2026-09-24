@@ -16,8 +16,6 @@ class TestWishlist:
         assert HomePage(browser).is_user_logged_in(), "Пользователь не залогинен"
 
     @allure.title("Добавить товар 'Brown bear printed sweater' в wishlist")
-    @allure.severity(allure.severity_level.CRITICAL)
-    @allure.story("Добавление")
     def test_add_product_to_wishlist(self, browser):
         with allure.step("Залогиниться"):
             self.login(browser)
