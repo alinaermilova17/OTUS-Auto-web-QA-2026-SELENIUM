@@ -6,29 +6,14 @@ from tests_selenium.page_objects.base_page import BasePage
 
 
 class WishlistPage(BasePage):
-
-    # Меню
     CLOTHES_MENU = (By.XPATH, "//li[@id='category-3']//a[contains(@class,'dropdown-item')]")
     WOMEN_LINK   = (By.XPATH, "//ul[contains(@class,'category-sub-menu')]//a[normalize-space()='Women']")
-
-    # Карточка конкретного товара
-    PRODUCT_BROWN_BEAR = (
-        By.CSS_SELECTOR,
-        "a[href*='brown-bear-printed-sweater']"
-    )
-
-    # Кнопка wishlist на странице товара
+    PRODUCT_BROWN_BEAR = (By.CSS_SELECTOR,"a[href*='brown-bear-printed-sweater']")
     WISHLIST_BUTTON = (By.CSS_SELECTOR, "button.wishlist-button-add")
-
-    # Модалка + пункт внутри
     WISHLIST_MODAL = (By.CSS_SELECTOR, ".wishlist-modal.modal.show, .wishlist-modal.modal.fade.show")
-    WISHLIST_MODAL_ITEM = (
-        By.CSS_SELECTOR,
+    WISHLIST_MODAL_ITEM = (By.CSS_SELECTOR,
         ".wishlist-modal.modal.show .modal-body ul li p, "
-        ".wishlist-modal.modal.fade.show .modal-body ul li p"
-    )
-
-    # Футер и страница wishlist
+        ".wishlist-modal.modal.fade.show .modal-body ul li p")
     MY_WISHLIST_FOOTER   = (By.CSS_SELECTOR, "#footer_account_list > li:nth-child(5) > a")
     WISHLIST_LIST_FIRST  = (By.CSS_SELECTOR, "#content > div > ul > li > a > p")
     WISHLIST_PRODUCT_IMG = (By.CSS_SELECTOR, "#content > ul > li > div > a > div.wishlist-product-image > img")
@@ -50,24 +35,22 @@ class WishlistPage(BasePage):
         allure.attach(url, "current url", allure.attachment_type.TEXT)
         return "brown-bear-printed-sweater" in url
 
-    @allure.step("Добавить в wishlist")
     def add_to_wishlist(self):
-        # 1. клик по кнопке wishlist
         self.click(self.WISHLIST_BUTTON)
 
-        # 2. ждём PRESENCE (а не visibility) — модалка появляется с анимацией
         try:
-            self.wait.until(EC.presence_of_element_located(self.WISHLIST_MODAL))
-            # 3. ждём кликабельности пункта внутри модалки
-            item = self.wait.until(EC.element_to_be_clickable(self.WISHLIST_MODAL_ITEM))
+            self.wait_visible(self.WISHLIST_MODAL, timeout=10)
+            item = self.wait_clickable(self.WISHLIST_MODAL_ITEM)
             self.browser.execute_script("arguments[0].click();", item)
-            # 4. ждём закрытия
-            self.wait.until(EC.invisibility_of_element_located(self.WISHLIST_MODAL))
-        except TimeoutException:
+            self.wait_invisible(self.WISHLIST_MODAL)
+        except Exception as e:
             allure.attach(
                 self.browser.get_screenshot_as_png(),
                 "modal_not_found",
                 allure.attachment_type.PNG
+            )
+            allure.attach(
+                str(e), "exception", allure.attachment_type.TEXT
             )
         return self
 
