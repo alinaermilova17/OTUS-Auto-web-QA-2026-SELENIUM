@@ -44,16 +44,17 @@ class TestWishlist:
 
         page = WishlistPage(browser)
 
-        with allure.step("Очистить wishlists"):
+        with allure.step("Очистить wishlist от старых товаров"):
             page.clear_all_wishlists()
 
         with allure.step("Открыть Clothes → Women"):
             page.open_women_category()
 
-        with allure.step("Открыть карточку товара"):
+        with allure.step("Открыть карточку 'Brown bear printed sweater'"):
             page.open_brown_bear_product()
+            assert page.is_product_opened(), "Открылась не та карточка"
 
-        with allure.step("Убедиться, что товар в wishlist"):
+        with allure.step("Добавить товар в wishlist"):
             page.ensure_in_wishlist()
 
         with allure.step("Перейти в My wishlists через футер"):

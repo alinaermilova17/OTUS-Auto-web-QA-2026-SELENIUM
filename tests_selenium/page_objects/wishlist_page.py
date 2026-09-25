@@ -1,9 +1,6 @@
 import allure
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-
-from config import BASE_URL
 from tests_selenium.page_objects.base_page import BasePage
 
 
@@ -20,6 +17,16 @@ class WishlistPage(BasePage):
     WISHLIST_LIST_FIRST  = (By.CSS_SELECTOR, "#content > div > ul > li > a > p")
     WISHLIST_PRODUCT_IMG = (By.CSS_SELECTOR, "#content > ul > li > div > a > div.wishlist-product-image > img")
     WISHLIST_ICON = (By.CSS_SELECTOR, "button.wishlist-button-add i")
+
+    WISHLIST_ITEM_ROW        = (By.CSS_SELECTOR, "#content > ul > li")
+    DELETE_ITEM_BUTTON       = (By.CSS_SELECTOR, "#content > ul > li > div > div > button.wishlist-button-add")
+    DELETE_MODAL             = (By.CSS_SELECTOR, ".wishlist-delete .wishlist-modal.modal.fade.show")
+    DELETE_MODAL_CONFIRM_BTN = (
+        By.CSS_SELECTOR,
+        ".wishlist-delete .wishlist-modal.modal.fade.show "
+        ".modal-footer > button.btn.btn-primary"
+    )
+
 
     @allure.step("Открыть Clothes → Women")
     def open_women_category(self):
@@ -57,6 +64,22 @@ class WishlistPage(BasePage):
             )
         return self
 
+    @allure.step("Добавить в wishlist (если ещё не добавлен)")
+    def ensure_in_wishlist(self):
+        icon = self.find(self.WISHLIST_ICON)
+        classes = icon.get_attribute("class") or ""
+        allure.attach(classes, "icon class before", allure.attachment_type.TEXT)
+
+        if "favorite_border" in classes:
+            self.click(self.WISHLIST_BUTTON)
+            self.wait.until(
+                lambda d: "favorite_border" not in (
+                        d.find_element(*self.WISHLIST_ICON).get_attribute("class") or ""
+                )
+            )
+        return self
+
+
     @allure.step("Перейти в My wishlists через футер")
     def open_my_wishlist(self):
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -93,18 +116,63 @@ class WishlistPage(BasePage):
 
         return self
 
-    @allure.step("Очистить все wishlists")
+    @allure.step("Очистить первый wishlist от всех товаров")
     def clear_all_wishlists(self):
-        self.browser.get(f"{BASE_URL}/module/blockwishlist/lists")
-        while True:
-            buttons = self.browser.find_elements(
-                "css selector", "a[href*='delete'], .wishlist-delete, button[data-action='delete']"
-            )
-            if not buttons:
+        """
+        Открывает My wishlists → первый список → удаляет все товары.
+        """
+        # 1. Перейти в футер → My wishlists
+        self.open_my_wishlist()
+
+        # 2. Открыть первый список
+        self.open_first_wishlist()
+
+        # 3. Пока есть товары — удалять их
+        max_iterations = 20  # защита от бесконечного цикла
+        iteration = 0
+        while iteration < max_iterations:
+            iteration += 1
+
+            # есть ли хотя бы один товар в списке
+            items = self.browser.find_elements(*self.WISHLIST_ITEM_ROW)
+            if not items:
+                allure.attach(
+                    f"wishlist пуст (итерация {iteration})",
+                    "clear wishlist",
+                    allure.attachment_type.TEXT
+                )
                 break
-            buttons[0].click()
+
+            allure.attach(
+                f"удаляем товар #{iteration}",
+                "clear wishlist",
+                allure.attachment_type.TEXT
+            )
+
+            # 4. клик по кнопке удаления первого товара
+            delete_btn = self.wait_clickable(self.DELETE_ITEM_BUTTON)
+            self.browser.execute_script("arguments[0].click();", delete_btn)
+
+            # 5. ждём модалку подтверждения
+            self.wait_visible(self.DELETE_MODAL, timeout=10)
+
+            # 6. клик по кнопке подтверждения в модалке
+            confirm_btn = self.wait_clickable(self.DELETE_MODAL_CONFIRM_BTN)
+            self.browser.execute_script("arguments[0].click();", confirm_btn)
+
+            # 7. ждём, что модалка исчезла
+            self.wait_invisible(self.DELETE_MODAL)
+
+            # 8. ждём, что список обновился (товар исчез)
             try:
-                self.browser.switch_to.alert.accept()
-            except Exception:
-                pass
+                self.wait.until(
+                    lambda d: len(d.find_elements(*self.WISHLIST_ITEM_ROW)) < len(items)
+                )
+            except TimeoutException:
+                allure.attach(
+                    self.browser.get_screenshot_as_png(),
+                    f"item_not_removed_{iteration}",
+                    allure.attachment_type.PNG
+                )
+
         return self
