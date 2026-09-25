@@ -38,33 +38,46 @@ class CatalogPage(BasePage):
 
     @allure.step("Сортировать: {value}")
     def sort_by(self, value: str):
-        self.click(self.SORT_DROPDOWN_BUTTON)
-        self.wait_visible((
-            By.CSS_SELECTOR, ".products-sort-order .dropdown-menu a"
-        ))
+        # 1. Открыть dropdown сортировки
+        button = self.wait_visible(self.SORT_DROPDOWN_BUTTON)
+        self.browser.execute_script(
+            "arguments[0].scrollIntoView({block: 'center'});", button
+        )
+        self.browser.execute_script("arguments[0].click();", button)
 
-        old_first = self.find((
-            By.CSS_SELECTOR,
-            "#js-product-list article.product-miniature"
-        ))
-        self.click((
+        # 2. Кликнуть по нужному пункту
+        item = self.wait_visible((
             By.CSS_SELECTOR,
             f".products-sort-order .dropdown-menu a[href*='order={value}']"
         ))
+        self.browser.execute_script("arguments[0].click();", item)
 
+        # 3. Дождаться, что URL обновился
         self.wait.until(lambda d: f"order={value}" in d.current_url)
-        self.wait.until(EC.staleness_of(old_first))
+
+        # 4. Дождаться, что товары отрисовались
         self.wait.until(EC.presence_of_element_located((
-            By.CSS_SELECTOR,
-            "#js-product-list article.product-miniature"
+            By.CSS_SELECTOR, "#js-product-list article.product-miniature"
         )))
 
+        # 5. ПРОСКРОЛЛИТЬ К СПИСКУ ТОВАРОВ (после перезагрузки viewport сбрасывается наверх)
+        self.browser.execute_script(
+            "document.querySelector('#js-product-list')"
+            ".scrollIntoView({block: 'start'});"
+        )
         return self
-
 
     @allure.step("Получить список названий товаров")
     def get_names(self) -> list:
-        elements = self.browser.find_elements(self.PRODUCT_NAME)
+        # гарантируем, что все товары видны
+        self.browser.execute_script(
+            "window.scrollTo(0, document.body.scrollHeight);"
+        )
+        # небольшая пауза, чтобы DOM устоялся
+        import time;
+        time.sleep(0.5)
+
+        elements = self.browser.find_elements(*self.PRODUCT_NAME)
         names = []
         for el in elements:
             try:
