@@ -37,16 +37,32 @@ class CatalogPage(BasePage):
         return self
 
     @allure.step("Выбрать сортировку: Z-A")
-    def sort_by(self):
+    @allure.step("Сортировать: {orderby} {orderway}")
+    def sort_by(self, orderby: str, orderway: str):
         self.click(self.SORT_DROPDOWN_BUTTON)
-        self.click(self.SORT_OPTION_NAME_DESC)
+        self.wait_visible((
+            By.CSS_SELECTOR, ".products-sort-order.dropdown.open"
+        ))
+        self.click((
+            By.CSS_SELECTOR,
+            f".products-sort-order .dropdown-menu a"
+            f"[href*='orderby={orderby}'][href*='orderway={orderway}']"
+        ))
+        self.wait.until(lambda d: "orderby" in d.current_url)
         return self
 
 
 
     @allure.step("Получить список названий товаров")
     def get_names(self) -> list:
-        elements = self.browser.find_elements(*self.PRODUCT_NAME)
-        names = [el.text.strip() for el in elements if el.text.strip()]
+        elements = self.browser.find_elements(self.PRODUCT_NAME)
+        names = []
+        for el in elements:
+            try:
+                txt = el.text.strip()
+                if txt:
+                    names.append(txt)
+            except Exception:
+                pass
         allure.attach(str(names), "names", allure.attachment_type.TEXT)
         return names
