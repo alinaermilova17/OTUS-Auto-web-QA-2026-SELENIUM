@@ -1,6 +1,6 @@
 import requests
 import allure
-from config import BASE_API_URL
+from tests_selenium.api.config_api import BASE_API_URL
 
 
 class BaseApi:
