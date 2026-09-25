@@ -1,0 +1,85 @@
+pipeline {
+    agent any
+
+    options {
+        timestamps()
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/alinaermilova17/OTUS-Auto-web-QA-2026-SELENIUM.git'
+            }
+        }
+
+        stage('Setup Environment') {
+            steps {
+                sh '''
+                    echo === Версия Python ===
+                    python3 --version
+
+                    echo === Установка зависимостей ===
+                    pip3 install --break-system-packages \
+                        pytest pytest-xdist allure-pytest requests python-dotenv faker
+
+                    echo === Создание .env для API ===
+                    cat > tests_selenium/.env <<EOF
+BASE_API_URL=https://restful-booker.herokuapp.com
+EOF
+
+                    cat tests_selenium/.env
+                '''
+            }
+        }
+
+        stage('API Health Check') {
+            steps {
+                sh '''
+                    echo === Проверка доступности API ===
+                    curl -s -o /dev/null -w "HTTP %{http_code}\\n" \
+                        https://restful-booker.herokuapp.com/ping || true
+                '''
+            }
+        }
+
+        stage('Run API Tests') {
+            steps {
+                sh '''
+                    echo === Запуск API-тестов ===
+                    cd tests_selenium
+                    mkdir -p allure-results
+                    python3 -m pytest api/tests_api/ -v \
+                        --alluredir=allure-results \
+                        -n 2
+                '''
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'tests_selenium/allure-results']]
+                ])
+            }
+            archiveArtifacts artifacts: 'tests_selenium/allure-results/**', allowEmptyArchive: true
+        }
+        success {
+            echo '✅ API-тесты прошли'
+        }
+        failure {
+            echo '❌ API-тесты упали. Смотри Allure-отчёт.'
+        }
+        cleanup {
+            cleanWs()
+        }
+    }
+}
