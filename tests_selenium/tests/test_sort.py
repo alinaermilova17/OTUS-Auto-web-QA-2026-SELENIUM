@@ -21,7 +21,7 @@ class TestCatalogSort:
         page = CatalogPage(browser)
 
         with allure.step("Открыть категорию Art"):
-            page.open_art_by_url(f'{BASE_URL}/9-art')
+            page.open_art_by_url()
 
         with allure.step("Сортировать по цене — от дешёвых к дорогим"):
             page.sort_by("price.asc")

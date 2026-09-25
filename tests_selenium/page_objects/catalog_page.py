@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
 from selenium.webdriver.support.ui import Select
 import re
+from config import BASE_URL
+
 
 
 class CatalogPage(BasePage):
@@ -29,8 +31,8 @@ class CatalogPage(BasePage):
         return self
 
     @allure.step("Открыть категорию Art по URL")
-    def open_art_by_url(self,url):
-        self.browser.get(url)
+    def open_art_by_url(self):
+        self.browser.get(f'{BASE_URL}/9-art')
         return self
 
     @allure.step("Выбрать сортировку: {value}")
