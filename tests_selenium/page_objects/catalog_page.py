@@ -1,3 +1,5 @@
+import re
+
 import allure
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
@@ -88,3 +90,19 @@ class CatalogPage(BasePage):
                 pass
         allure.attach(str(names), "names", allure.attachment_type.TEXT)
         return names
+
+    @allure.step("Получить список цен товаров")
+    def get_prices(self) -> list:
+        elements = self.browser.find_elements(*self.PRODUCT_PRICE)
+        prices = []
+        for el in elements:
+            try:
+                text = el.text.strip()
+                num = re.sub(r"[^\d.,]", "", text).replace(",", ".")
+                if num:
+                    prices.append(float(num))
+            except Exception:
+                pass
+        allure.attach(str(prices), "prices", allure.attachment_type.TEXT)
+        return prices
+
