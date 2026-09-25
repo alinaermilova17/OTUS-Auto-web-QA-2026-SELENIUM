@@ -26,6 +26,9 @@ class TestWishlist:
 
         page = WishlistPage(browser)
 
+        with allure.step("Очистить wishlist от старых товаров"):
+            page.clear_all_wishlists()
+
         with allure.step("Открыть Clothes → Women"):
             page.open_women_category()
 
@@ -36,26 +39,6 @@ class TestWishlist:
 
         with allure.step("Добавить в wishlist через модалку"):
             page.add_to_wishlist()
-
-    @allure.title("Проверить, что товар сохранён в My wishlist")
-    def test_product_present_in_wishlist(self, browser):
-        with allure.step("Залогиниться"):
-            self._login(browser)
-
-        page = WishlistPage(browser)
-
-        with allure.step("Очистить wishlist от старых товаров"):
-            page.clear_all_wishlists()
-
-        with allure.step("Открыть Clothes → Women"):
-            page.open_women_category()
-
-        with allure.step("Открыть карточку 'Brown bear printed sweater'"):
-            page.open_brown_bear_product()
-            assert page.is_product_opened(), "Открылась не та карточка"
-
-        with allure.step("Добавить товар в wishlist"):
-            page.ensure_in_wishlist()
 
         with allure.step("Перейти в My wishlists через футер"):
             page.open_my_wishlist()
