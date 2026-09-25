@@ -25,7 +25,7 @@ class TestCatalogSort:
             page.open_art_by_url()
 
         with allure.step("Сортировать по названию (Z → A)"):
-            page.sort_by("price", "desc")
+            page.sort_by("product.name.desc")
 
         with allure.step("Проверить, что названия идут по убыванию"):
             names = page.get_names()
