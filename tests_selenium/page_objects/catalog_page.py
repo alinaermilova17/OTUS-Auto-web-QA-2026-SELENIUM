@@ -2,7 +2,7 @@ import allure
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
 from config import BASE_URL
-
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class CatalogPage(BasePage):
@@ -36,21 +36,30 @@ class CatalogPage(BasePage):
         self.browser.get(f'{BASE_URL}/9-art')
         return self
 
-    @allure.step("Выбрать сортировку: Z-A")
-    @allure.step("Сортировать: {orderby} {orderway}")
-    def sort_by(self, orderby: str, orderway: str):
+    @allure.step("Сортировать: {value}")
+    def sort_by(self, value: str):
         self.click(self.SORT_DROPDOWN_BUTTON)
         self.wait_visible((
-            By.CSS_SELECTOR, ".products-sort-order.dropdown.open"
+            By.CSS_SELECTOR, ".products-sort-order .dropdown-menu a"
+        ))
+
+        old_first = self.find((
+            By.CSS_SELECTOR,
+            "#js-product-list article.product-miniature"
         ))
         self.click((
             By.CSS_SELECTOR,
-            f".products-sort-order .dropdown-menu a"
-            f"[href*='orderby={orderby}'][href*='orderway={orderway}']"
+            f".products-sort-order .dropdown-menu a[href*='order={value}']"
         ))
-        self.wait.until(lambda d: "orderby" in d.current_url)
-        return self
 
+        self.wait.until(lambda d: f"order={value}" in d.current_url)
+        self.wait.until(EC.staleness_of(old_first))
+        self.wait.until(EC.presence_of_element_located((
+            By.CSS_SELECTOR,
+            "#js-product-list article.product-miniature"
+        )))
+
+        return self
 
 
     @allure.step("Получить список названий товаров")
