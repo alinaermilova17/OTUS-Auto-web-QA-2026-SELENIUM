@@ -53,7 +53,7 @@ EOF
                     mkdir -p allure-results
                     python3 -m pytest api/tests_api/ -v \
                         --alluredir=allure-results \
-                        -n 2
+                        -n 4
                 '''
             }
         }
