@@ -2,6 +2,7 @@ import allure
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
 from selenium.webdriver.support.ui import Select
+import re
 
 
 class CatalogPage(BasePage):
@@ -28,19 +29,14 @@ class CatalogPage(BasePage):
         return self
 
     @allure.step("Открыть категорию Art по URL")
-    def open_art_by_url(self):
-        self.browser.get(f"{self.base_url}/9-art")
+    def open_art_by_url(self,url):
+        self.browser.get(url)
         return self
 
     @allure.step("Выбрать сортировку: {value}")
     def sort_by(self, value: str):
-        """
-        value — value у <option> в select сортировки.
-        Например: 'price.asc', 'price.desc', 'name.asc', 'name.desc'
-        """
         select_el = self.wait_visible(self.SORT_SELECT)
         Select(select_el).select_by_value(value)
-        # PrestaShop перезагружает страницу после смены сортировки
         self.wait.until(
             lambda d: value in d.current_url or "orderby" in d.current_url
         )
@@ -48,13 +44,10 @@ class CatalogPage(BasePage):
 
     @allure.step("Получить список цен товаров")
     def get_prices(self) -> list:
-        """Возвращает список float-цен всех товаров на странице."""
-        import re
         elements = self.browser.find_elements(*self.PRODUCT_PRICE)
         prices = []
         for el in elements:
             text = el.text.strip()
-            # оставляем только цифры, точку и запятую
             num = re.sub(r"[^\d.,]", "", text).replace(",", ".")
             if num:
                 try:

@@ -6,7 +6,7 @@ from tests_selenium.page_objects.base_page import BasePage
 
 class WishlistPage(BasePage):
     CLOTHES_MENU = (By.XPATH, "//li[@id='category-3']//a[contains(@class,'dropdown-item')]")
-    WOMEN_LINK   = (By.XPATH, "//ul[contains(@class,'category-sub-menu')]//a[normalize-space()='Women']")
+    WOMEN_LINK  = (By.XPATH, "//ul[contains(@class,'category-sub-menu')]//a[normalize-space()='Women']")
     PRODUCT_BROWN_BEAR = (By.CSS_SELECTOR,"a[href*='brown-bear-printed-sweater']")
     WISHLIST_BUTTON = (By.CSS_SELECTOR, "button.wishlist-button-add")
     WISHLIST_MODAL = (By.CSS_SELECTOR, ".wishlist-modal.modal.show, .wishlist-modal.modal.fade.show")
@@ -17,7 +17,6 @@ class WishlistPage(BasePage):
     WISHLIST_LIST_FIRST  = (By.CSS_SELECTOR, "#content > div > ul > li > a > p")
     WISHLIST_PRODUCT_IMG = (By.CSS_SELECTOR, "#content > ul > li > div > a > div.wishlist-product-image > img")
     WISHLIST_ICON = (By.CSS_SELECTOR, "button.wishlist-button-add i")
-
     WISHLIST_ITEM_ROW        = (By.CSS_SELECTOR, "#content > ul > li")
     DELETE_ITEM_BUTTON       = (By.CSS_SELECTOR, "#content > ul > li > div > div > button.wishlist-button-add")
     DELETE_MODAL             = (By.CSS_SELECTOR, ".wishlist-delete .wishlist-modal.modal.fade.show")

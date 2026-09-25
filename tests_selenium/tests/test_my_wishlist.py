@@ -1,7 +1,4 @@
-# tests_selenium/tests/test_my_wishlist.py
 import allure
-import pytest
-
 from tests_selenium.page_objects.login_page import LoginPage
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.wishlist_page import WishlistPage
