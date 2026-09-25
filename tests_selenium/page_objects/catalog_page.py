@@ -1,8 +1,6 @@
 import allure
 from selenium.webdriver.common.by import By
 from tests_selenium.page_objects.base_page import BasePage
-from selenium.webdriver.support.ui import Select
-import re
 from config import BASE_URL
 
 
@@ -38,7 +36,7 @@ class CatalogPage(BasePage):
         self.browser.get(f'{BASE_URL}/9-art')
         return self
 
-    @allure.step("Выбрать сортировку: {value}")
+    @allure.step("Выбрать сортировку: Z-A")
     def sort_by(self):
         self.click(self.SORT_DROPDOWN_BUTTON)
         self.click(self.SORT_OPTION_NAME_DESC)
