@@ -18,6 +18,9 @@ class CatalogPage(BasePage):
     PRODUCTS = (By.CSS_SELECTOR, "#js-product-list article.product-miniature")
     PRODUCT_PRICE = (By.CSS_SELECTOR, ".price, span[itemprop='price']")
     PRODUCT_NAME = (By.CSS_SELECTOR, ".product-title a, h3.product-title a, h2.product-title a")
+    SORT_DROPDOWN_BUTTON = (By.CSS_SELECTOR,"#js-product-list-top > div:nth-child(2) > div > " "div.products-sort-order.dropdown > button")
+    SORT_OPTION_NAME_DESC = (By.CSS_SELECTOR, ".products-sort-order .dropdown-menu a[href*='name.desc']")
+
 
     @allure.step("Нажать на подкатегорию 'Men'")
     def subcategory_men(self):
@@ -36,30 +39,12 @@ class CatalogPage(BasePage):
         return self
 
     @allure.step("Выбрать сортировку: {value}")
-    def sort_by(self, value: str):
-        select_el = self.wait_visible(self.SORT_SELECT)
-        Select(select_el).select_by_value(value)
-        self.wait.until(
-            lambda d: value in d.current_url or "orderby" in d.current_url
-        )
+    def sort_by(self):
+        self.click(self.SORT_DROPDOWN_BUTTON)
+        self.click(self.SORT_OPTION_NAME_DESC)
         return self
 
-    @allure.step("Получить список цен товаров")
-    def get_prices(self) -> list:
-        elements = self.browser.find_elements(*self.PRODUCT_PRICE)
-        prices = []
-        for el in elements:
-            text = el.text.strip()
-            num = re.sub(r"[^\d.,]", "", text).replace(",", ".")
-            if num:
-                try:
-                    prices.append(float(num))
-                except ValueError:
-                    pass
-        allure.attach(
-            str(prices), "prices", allure.attachment_type.TEXT
-        )
-        return prices
+
 
     @allure.step("Получить список названий товаров")
     def get_names(self) -> list:
