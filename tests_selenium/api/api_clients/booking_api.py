@@ -7,7 +7,7 @@ class BookingApi(BaseApi):
 
     @allure.step("Создать токен")
     def create_token(self, username, password):
-        payload = {"username": API_USERNAME, "password": API_PASSWORD}
+        payload = {"username": username, "password": password}
         response = self.post("/auth", json=payload)
         self.attach_response(response)
         return response
