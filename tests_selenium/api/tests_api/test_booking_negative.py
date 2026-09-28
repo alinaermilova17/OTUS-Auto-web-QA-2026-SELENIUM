@@ -52,3 +52,21 @@ class TestBookingNegative:
         # 4. Проверяем через GET, что брони действительно нет
         get_response = api_client.get(f"/booking/{booking_id}")
         assert get_response.status_code == 404, get_response.text
+
+    @allure.title("Проверка PUT на обязательность заполнения поля firstname при изменении ")
+    def test_update_booking_without_firstname(
+            self,
+            api_client,
+            created_booking,
+            auth_token,
+            sample_booking_payload,
+    ):
+        updated = sample_booking_payload.copy()
+        updated.pop("firstname")
+
+        response = api_client.update_booking(
+            created_booking, updated, token=auth_token,
+        )
+
+        assert response.status_code == 400, response.text
+
