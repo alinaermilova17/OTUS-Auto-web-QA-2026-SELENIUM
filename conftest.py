@@ -54,7 +54,7 @@ def pytest_addoption(parser):
     parser.addoption('--headed', action='store_true', default=False,
                      help='Run browser in headed mode')
     parser.addoption('--url', action='store',
-                     default=os.getenv('URL', 'http://localhost:8081'),
+                     default=os.getenv('URL', 'http://prestashop:8081'),
                      help="Base URL for PrestaShop")
 
 
