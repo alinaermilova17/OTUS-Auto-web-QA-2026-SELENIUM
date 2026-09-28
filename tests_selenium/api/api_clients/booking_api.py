@@ -1,12 +1,13 @@
 import allure
 from tests_selenium.api.api_clients.base_api import BaseApi
+from tests_selenium.api.config_api import API_USERNAME, API_PASSWORD
 
 
 class BookingApi(BaseApi):
 
     @allure.step("Создать токен")
     def create_token(self, username, password):
-        payload = {"username": username, "password": password}
+        payload = {"username": API_USERNAME, "password": API_PASSWORD}
         response = self.post("/auth", json=payload)
         self.attach_response(response)
         return response
