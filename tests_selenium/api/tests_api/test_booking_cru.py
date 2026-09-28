@@ -1,8 +1,23 @@
 import allure
+import pytest
 
 
 @allure.feature("Booking CRUD")
 class TestBookingCrud:
+    @pytest.fixture
+    def sample_booking_payload(self):
+        return {
+            "firstname": "Jim",
+            "lastname": "Brown",
+            "totalprice": 111,
+            "depositpaid": True,
+            "bookingdates": {
+                "checkin": "2018-01-01",
+                "checkout": "2019-01-01",
+            },
+            "additionalneeds": "Breakfast",
+        }
+
 
     @allure.title("Создание брони")
     def test_create_booking(self, api_client, sample_booking_payload):

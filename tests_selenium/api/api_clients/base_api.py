@@ -1,11 +1,13 @@
 import requests
 import allure
-from tests_selenium.api.config_api import BASE_API_URL
+from tests_selenium.api.config_api import BASE_API_URL, API_USERNAME, API_PASSWORD
 
 
 class BaseApi:
     def __init__(self):
         self.base_url = BASE_API_URL
+        self.username = API_USERNAME
+        self.password = API_PASSWORD
         self.session = requests.Session()
 
     @allure.step("GET {path}")
