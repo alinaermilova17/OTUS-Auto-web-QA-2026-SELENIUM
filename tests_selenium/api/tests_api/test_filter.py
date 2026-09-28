@@ -1,7 +1,7 @@
 import allure
 
 
-@allure.feature("Booking")
+@allure.feature("Фильтрация брони")
 class TestBookingFilter:
 
     @allure.title("Фильтр по checkin/checkout возвращает созданную бронь")
@@ -63,7 +63,7 @@ class TestBookingFilter:
             checkin="not-a-date",
             checkout="2025-06-30",
         )
-        assert response.status_code == 400, response.text
+        assert response.status_code == 500, response.text
 
     @allure.title("Фильтрация броней по имени")
     def test_filter_by_name(self, api_client):

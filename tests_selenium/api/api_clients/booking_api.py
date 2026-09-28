@@ -54,3 +54,20 @@ class BookingApi(BaseApi):
         response = self.delete(f"/booking/{booking_id}", headers=headers)
         self.attach_response(response)
         return response
+
+    @allure.step("Фильтр броней checkin={checkin} checkout={checkout} firstname={firstname} lastname={lastname}")
+    def filter_bookings(self, checkin=None, checkout=None,
+                        firstname=None, lastname=None):
+        params = {}
+        if checkin:
+            params["checkin"] = checkin
+        if checkout:
+            params["checkout"] = checkout
+        if firstname:
+            params["firstname"] = firstname
+        if lastname:
+            params["lastname"] = lastname
+
+        response = self.get("/booking", params=params)
+        self.attach_response(response)
+        return response
