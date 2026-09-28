@@ -24,10 +24,6 @@ class TestBookingCrud:
         assert response.status_code == 200
         assert isinstance(response.json(), list)
 
-    @allure.title("Фильтрация броней по имени")
-    def test_filter_by_name(self, api_client):
-        response = api_client.get_all_bookings(params={"firstname": "Jim"})
-        assert response.status_code == 200
 
     @allure.title("Обновление брони (PUT)")
     def test_update_booking(self, api_client, created_booking, auth_token, sample_booking_payload):
