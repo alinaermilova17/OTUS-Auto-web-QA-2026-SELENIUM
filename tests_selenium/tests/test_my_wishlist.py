@@ -1,11 +1,12 @@
 import allure
+
 from tests_selenium.page_objects.login_page import LoginPage
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.wishlist_page import WishlistPage
 from config import LOGIN, PASSWORD, BASE_URL
 
 
-@allure.epic("UI")
+@allure.epic("Интернет-магазин")
 @allure.feature("Wishlist")
 class TestWishlist:
 
@@ -15,8 +16,16 @@ class TestWishlist:
         login_page.login(LOGIN, PASSWORD)
         assert HomePage(browser).is_user_logged_in(), "Пользователь не залогинен"
 
-
+    @allure.story("Добавление товара")
     @allure.title("Добавить товар в wishlist")
+    @allure.description(
+        "Авторизуемся, очищаем wishlist от старых товаров, открываем "
+        "категорию Clothes → Women, переходим в карточку товара "
+        "Brown Bear, добавляем его в wishlist и проверяем, что товар "
+        "действительно появился в списке желаний."
+    )
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.tag("ui", "wishlist", "smoke")
     def test_add_product_to_wishlist(self, browser):
         with allure.step("Залогиниться"):
             self._login(browser)
@@ -29,12 +38,13 @@ class TestWishlist:
         with allure.step("Открыть Clothes → Women"):
             page.open_women_category()
 
-        with allure.step("Открыть карточку товара"):
+        with allure.step("Открыть карточку товара Brown Bear"):
             page.open_brown_bear_product()
-            assert page.is_product_opened(), \
+            assert page.is_product_opened(), (
                 f"Открылась не та карточка: {browser.current_url}"
+            )
 
-        with allure.step("Добавить в wishlist через модалку"):
+        with allure.step("Добавить товар в wishlist через модалку"):
             page.add_to_wishlist()
 
         with allure.step("Перейти в My wishlists через футер"):
@@ -44,4 +54,6 @@ class TestWishlist:
             page.open_first_wishlist()
 
         with allure.step("Проверить, что товар есть в wishlist"):
-            assert page.has_product_in_wishlist(), "Товар не найден в wishlist"
+            assert page.has_product_in_wishlist(), (
+                "Товар не найден в wishlist"
+            )

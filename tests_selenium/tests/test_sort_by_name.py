@@ -1,10 +1,13 @@
 import allure
+
 from tests_selenium.page_objects.login_page import LoginPage
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.catalog_page import CatalogPage
 from config import LOGIN, PASSWORD, BASE_URL
 
 
+@allure.epic("Интернет-магазин")
+@allure.feature("Каталог")
 class TestCatalogSort:
 
     def _login(self, browser):
@@ -13,8 +16,15 @@ class TestCatalogSort:
         login_page.login(LOGIN, PASSWORD)
         assert HomePage(browser).is_user_logged_in(), "Пользователь не залогинен"
 
-
+    @allure.story("Сортировка")
     @allure.title("Сортировка Art по названию (Z → A)")
+    @allure.description(
+        "Авторизуемся, открываем категорию Art, применяем сортировку "
+        "по названию в порядке убывания (Z → A) и проверяем, что "
+        "названия товаров на странице действительно идут по убыванию."
+    )
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.tag("ui", "catalog", "sort")
     def test_sort_by_name_desc(self, browser):
         with allure.step("Залогиниться"):
             self._login(browser)
@@ -30,5 +40,6 @@ class TestCatalogSort:
         with allure.step("Проверить, что названия идут по убыванию"):
             names = page.get_names()
             assert names, "Не найдено ни одного названия на странице"
-            assert names == sorted(names, key=str.lower, reverse=True), \
+            assert names == sorted(names, key=str.lower, reverse=True), (
                 f"Названия не отсортированы Z → A: {names}"
+            )
