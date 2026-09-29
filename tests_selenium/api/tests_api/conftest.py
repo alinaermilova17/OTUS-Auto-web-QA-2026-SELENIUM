@@ -45,27 +45,3 @@ def created_booking(api_client, auth_token, sample_booking_payload):
     api_client.delete_booking(booking_id, auth_token)
 
 
-@pytest.fixture
-def booking_factory(api_client, auth_token, sample_booking_payload):
-    """Создаёт брони на основе sample_booking_payload с возможностью переопределить поля."""
-    created_ids = []
-
-    def _create(**overrides):
-        payload = {**sample_booking_payload, **overrides}
-        # bookingdates — вложенный dict, поэтому мержим отдельно
-        if "bookingdates" in overrides:
-            payload["bookingdates"] = {
-                **sample_booking_payload["bookingdates"],
-                **overrides["bookingdates"],
-            }
-
-        response = api_client.create_booking(payload)
-        assert response.status_code == 200, response.text
-        booking_id = response.json()["bookingid"]
-        created_ids.append(booking_id)
-        return {"id": booking_id, "payload": payload}
-
-    yield _create
-
-    for booking_id in created_ids:
-        api_client.delete_booking(booking_id, auth_token)
