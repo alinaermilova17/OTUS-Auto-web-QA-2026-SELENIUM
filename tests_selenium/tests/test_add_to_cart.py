@@ -51,16 +51,4 @@ class TestCart:
                 f"Товар успешно добавлен в корзину! Количество: {cart_count}"
             )
 
-    @allure.story("Удаление товара")
-    @allure.title("Проверка удаления товара из корзины")
-    @allure.severity(allure.severity_level.CRITICAL)
-    @allure.tag("ui", "cart", "smoke")
-    def test_delete_from_cart(self, browser):
-        cart_page = CartPage(browser)
-        with allure.step("Удаляем товар из корзины"):
-            cart_page.delete_from_cart()
-
-        with allure.step("Проверяем, что корзина пуста"):
-            assert cart_page.is_cart_empty_by_subtotal(), (
-                "Корзина не пуста после удаления товара")
 

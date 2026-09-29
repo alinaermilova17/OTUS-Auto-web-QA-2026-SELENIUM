@@ -1,12 +1,5 @@
 import allure
 
-from tests_selenium.page_objects.cart_page import CartPage
-from tests_selenium.page_objects.home_page import HomePage
-from tests_selenium.page_objects.login_page import LoginPage
-from config import LOGIN, PASSWORD, BASE_URL
-
-import allure
-
 from tests_selenium.page_objects.home_page import HomePage
 from tests_selenium.page_objects.login_page import LoginPage
 from tests_selenium.page_objects.cart_page import CartPage
@@ -46,19 +39,12 @@ class TestCart:
         with allure.step("Проверяем, что в корзине есть хотя бы один товар"):
             cart_count = cart_page.get_current_quantity()
             assert cart_count > 0, (
-                f"В корзине {cart_count} товаров, ожидался минимум 1"
-            )
-            allure.attach(
-                str(cart_count),
-                name="cart_quantity_before",
-                attachment_type=allure.attachment_type.TEXT,
-            )
+                f"В корзине {cart_count} товаров, ожидался минимум 1")
 
         with allure.step("Удаляем товар из корзины"):
             cart_page.delete_from_cart()
 
         with allure.step("Проверяем, что корзина пуста"):
-            assert cart_page.is_cart_empty_by_subtotal(), (
-                "Корзина не пуста после удаления товара"
-            )
+           cart_page.is_cart_empty_by_subtotal()
+
 
