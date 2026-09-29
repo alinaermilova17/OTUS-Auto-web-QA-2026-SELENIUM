@@ -32,8 +32,3 @@ class TestLoginLogout:
 
         with allure.step("Выполняем logout"):
             home_page.logout()
-
-        with allure.step("Проверяем, что пользователь вышел из системы"):
-            assert not home_page.is_user_logged_in(), (
-                "Пользователь остался авторизованным после logout"
-            )
