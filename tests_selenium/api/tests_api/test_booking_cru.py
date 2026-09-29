@@ -1,48 +1,121 @@
 import allure
 
 
+@allure.epic("Restful Booker API")
 @allure.feature("Booking CRUD")
 class TestBookingCrud:
 
+    @allure.story("Create")
     @allure.title("Создание брони")
+    @allure.description(
+        "Проверяем, что POST /booking создаёт бронь и возвращает bookingid, "
+        "а поля сохранённой брони совпадают с переданными."
+    )
+    @allure.severity(allure.severity_level.BLOCKER)
+    @allure.tag("api", "booking", "crud", "create", "smoke")
     def test_create_booking(self, api_client, sample_booking_payload):
-        response = api_client.create_booking(sample_booking_payload)
-        assert response.status_code == 200
-        data = response.json()
-        assert "bookingid" in data
-        assert data["booking"]["firstname"] == "Jim"
+        with allure.step("Отправляем запрос на создание брони"):
+            response = api_client.create_booking(sample_booking_payload)
 
+        with allure.step("Проверяем статус-код ответа"):
+            assert response.status_code == 200, response.text
+
+        with allure.step("Проверяем наличие bookingid и корректность полей"):
+            data = response.json()
+            assert "bookingid" in data, f"Нет bookingid в ответе: {data}"
+            assert data["booking"]["firstname"] == "Jim"
+
+    @allure.story("Read")
     @allure.title("Получение брони по ID")
+    @allure.description(
+        "Проверяем, что GET /booking/{id} возвращает 200 и корректные данные "
+        "ранее созданной брони."
+    )
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.tag("api", "booking", "crud", "read", "smoke")
     def test_get_booking(self, api_client, created_booking):
-        response = api_client.get_booking(created_booking)
-        assert response.status_code == 200
-        assert response.json()["lastname"] == "Brown"
+        with allure.step("Запрашиваем бронь по ID"):
+            response = api_client.get_booking(created_booking)
 
+        with allure.step("Проверяем статус-код ответа"):
+            assert response.status_code == 200, response.text
+
+        with allure.step("Проверяем поле lastname"):
+            assert response.json()["lastname"] == "Brown"
+
+    @allure.story("Read")
     @allure.title("Получение списка всех броней")
+    @allure.description(
+        "Проверяем, что GET /booking возвращает 200 и список броней."
+    )
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.tag("api", "booking", "crud", "read")
     def test_get_all_bookings(self, api_client):
-        response = api_client.get_all_bookings()
-        assert response.status_code == 200
-        assert isinstance(response.json(), list)
+        with allure.step("Запрашиваем список всех броней"):
+            response = api_client.get_all_bookings()
 
+        with allure.step("Проверяем статус-код и тип данных"):
+            assert response.status_code == 200, response.text
+            assert isinstance(response.json(), list), (
+                f"Ожидался list, получено: {type(response.json())}"
+            )
 
+    @allure.story("Update")
     @allure.title("Обновление брони (PUT)")
+    @allure.description(
+        "Проверяем, что PUT /booking/{id} полностью обновляет бронь. "
+        "Меняем firstname на 'James' и проверяем результат."
+    )
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.tag("api", "booking", "crud", "update")
     def test_update_booking(self, api_client, created_booking, auth_token, sample_booking_payload):
         updated = sample_booking_payload.copy()
         updated["firstname"] = "James"
-        response = api_client.update_booking(created_booking, updated, token=auth_token)
-        assert response.status_code == 200
-        assert response.json()["firstname"] == "James"
 
+        with allure.step("Отправляем PUT-запрос с обновлёнными данными"):
+            response = api_client.update_booking(
+                created_booking, updated, token=auth_token
+            )
+
+        with allure.step("Проверяем статус-код и обновлённое поле"):
+            assert response.status_code == 200, response.text
+            assert response.json()["firstname"] == "James"
+
+    @allure.story("Update")
     @allure.title("Частичное обновление (PATCH)")
+    @allure.description(
+        "Проверяем, что PATCH /booking/{id} частично обновляет бронь. "
+        "Меняем только firstname на 'Jane' и проверяем результат."
+    )
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.tag("api", "booking", "crud", "patch")
     def test_patch_booking(self, api_client, created_booking, auth_token):
-        response = api_client.patch_booking(created_booking, {"firstname": "Jane"}, token=auth_token)
-        assert response.status_code == 200
-        assert response.json()["firstname"] == "Jane"
+        with allure.step("Отправляем PATCH-запрос с новым firstname"):
+            response = api_client.patch_booking(
+                created_booking, {"firstname": "Jane"}, token=auth_token
+            )
 
+        with allure.step("Проверяем статус-код и обновлённое поле"):
+            assert response.status_code == 200, response.text
+            assert response.json()["firstname"] == "Jane"
+
+    @allure.story("Delete")
     @allure.title("Удаление брони")
+    @allure.description(
+        "Проверяем, что DELETE /booking/{id} удаляет бронь (201), "
+        "а последующий GET возвращает 404."
+    )
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.tag("api", "booking", "crud", "delete")
     def test_delete_booking(self, api_client, created_booking, auth_token):
-        response = api_client.delete_booking(created_booking, token=auth_token)
-        assert response.status_code == 201
-        # убедимся, что после удаления GET возвращает 404
-        get_response = api_client.get_booking(created_booking)
-        assert get_response.status_code == 404
+        with allure.step("Отправляем DELETE-запрос"):
+            response = api_client.delete_booking(created_booking, token=auth_token)
+
+        with allure.step("Проверяем статус-код удаления (201)"):
+            assert response.status_code == 201, response.text
+
+        with allure.step("Проверяем, что бронь больше недоступна (GET -> 404)"):
+            get_response = api_client.get_booking(created_booking)
+            assert get_response.status_code == 404, (
+                f"Ожидался 404, получен {get_response.status_code}: {get_response.text}"
+            )
