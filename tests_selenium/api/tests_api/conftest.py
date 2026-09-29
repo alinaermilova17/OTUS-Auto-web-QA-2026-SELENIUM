@@ -37,10 +37,9 @@ def created_booking(api_client, sample_booking_payload):
     assert response.status_code == 200, response.text
     booking_id = response.json()["bookingid"]
 
-    yield booking_id
-    try:
-        api_client.delete_booking(booking_id, token=auth_token)
-    except Exception:
-        pass
+    yield {
+        "id": booking_id,
+        "payload": sample_booking_payload,
+    }
 
-
+    api_client.delete_booking(booking_id, auth_token)

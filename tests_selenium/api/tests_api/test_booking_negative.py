@@ -31,7 +31,7 @@ class TestBookingNegative:
     def test_update_without_auth(self, api_client, created_booking, sample_booking_payload):
         with allure.step("Отправляем PUT без токена"):
             response = api_client.update_booking(
-                created_booking, sample_booking_payload, token=None
+                created_booking["id"], sample_booking_payload, token=None
             )
 
         with allure.step("Проверяем статус-код 403"):
@@ -47,7 +47,7 @@ class TestBookingNegative:
     @allure.tag("api", "booking", "negative", "auth", "delete")
     def test_delete_without_auth(self, api_client, created_booking):
         with allure.step("Отправляем DELETE без токена"):
-            response = api_client.delete_booking(created_booking, token=None)
+            response = api_client.delete_booking(created_booking["id"], token=None)
 
         with allure.step("Проверяем статус-код 403"):
             assert response.status_code == 403, response.text

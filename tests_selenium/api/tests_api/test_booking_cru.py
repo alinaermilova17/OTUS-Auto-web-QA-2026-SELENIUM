@@ -35,7 +35,7 @@ class TestBookingCrud:
     @allure.tag("api", "booking", "crud", "read", "smoke")
     def test_get_booking(self, api_client, created_booking):
         with allure.step("Запрашиваем бронь по ID"):
-            response = api_client.get_booking(created_booking)
+            response = api_client.get_booking(created_booking["id"])
 
         with allure.step("Проверяем статус-код ответа"):
             assert response.status_code == 200, response.text
@@ -74,7 +74,7 @@ class TestBookingCrud:
 
         with allure.step("Отправляем PUT-запрос с обновлёнными данными"):
             response = api_client.update_booking(
-                created_booking, updated, token=auth_token
+                created_booking["id"], updated, token=auth_token
             )
 
         with allure.step("Проверяем статус-код и обновлённое поле"):
@@ -92,7 +92,7 @@ class TestBookingCrud:
     def test_patch_booking(self, api_client, created_booking, auth_token):
         with allure.step("Отправляем PATCH-запрос с новым firstname"):
             response = api_client.patch_booking(
-                created_booking, {"firstname": "Jane"}, token=auth_token
+                created_booking["id"], {"firstname": "Jane"}, token=auth_token
             )
 
         with allure.step("Проверяем статус-код и обновлённое поле"):
@@ -109,7 +109,7 @@ class TestBookingCrud:
     @allure.tag("api", "booking", "crud", "delete")
     def test_delete_booking(self, api_client, created_booking, auth_token):
         with allure.step("Отправляем DELETE-запрос"):
-            response = api_client.delete_booking(created_booking, token=auth_token)
+            response = api_client.delete_booking(created_booking["id"], token=auth_token)
 
         with allure.step("Проверяем статус-код удаления (201)"):
             assert response.status_code == 201, response.text
