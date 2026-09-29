@@ -32,16 +32,15 @@ def sample_booking_payload():
 
 
 @pytest.fixture
-def created_booking(api_client, auth_token, sample_booking_payload):
+def created_booking(api_client, sample_booking_payload):
     response = api_client.create_booking(sample_booking_payload)
     assert response.status_code == 200, response.text
     booking_id = response.json()["bookingid"]
 
-    yield {
-        "id": booking_id,
-        "payload": sample_booking_payload,
-    }
-
-    api_client.delete_booking(booking_id, auth_token)
+    yield booking_id
+    try:
+        api_client.delete_booking(booking_id, token=auth_token)
+    except Exception:
+        pass
 
 
