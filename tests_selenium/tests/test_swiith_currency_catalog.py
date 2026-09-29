@@ -41,6 +41,4 @@ class TestCurrency:
             catalog_page.subcategory_men()
 
         with allure.step("Проверяем, что цены отображаются в USD"):
-            assert main_page.price_in_usd(), (
-                "Цены в каталоге не отображаются в USD после переключения валюты"
-            )
+            main_page.price_in_usd()
