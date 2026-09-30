@@ -49,7 +49,7 @@ EOF
                         --browser=chrome \
                         --browser_version=150.0 \
                         --url=http://prestashop:8081 \
-                        --alluredir=allure-results -n 2
+                        --alluredir=allure-results -n 4
                 '''
             }
         }
