@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1015209f-1887-4691-a9a7-3438acc004ed" name="Changes" comment="initial commit" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Jenkins-2" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;alinaermilova17&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/alinaermilova17/OTUS-Auto-web-QA-2026-SELENIUM.git&quot;,
+    &quot;accountId&quot;: &quot;ec61f735-cc2f-4352-acd9-629924e6e4af&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;alinaermilova17&quot;,
+    &quot;repository&quot;: &quot;OTUS-Auto-web-QA-2026-SELENIUM&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="3EBVwaSLdXw2RKZffbpqlw0rMFX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Allure Tests.executor": "Run",
+    "Python tests.Python tests for tests_2.tests.test_find_element_by.test_catalog_page.executor": "Run",
+    "Python tests.Python tests for tests_2.tests.test_find_element_by.test_main_page.executor": "Run",
+    "Python tests.Python tests for tests_2.tests.test_find_element_by.test_product_page.executor": "Run",
+    "Python tests.Python tests for tests_2.tests.test_find_element_by.test_register_page.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_auth.TestAuth.test_create_token_invalid.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_auth.TestAuth.test_create_token_success.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_booking_cru.TestBookingCrud.test_create_booking.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_booking_cru.TestBookingCrud.test_update_booking.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_booking_negative.TestBookingNegative.test_delete_already_deleted_booking.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_booking_negative.TestBookingNegative.test_update_booking_without_firstname.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_filter.TestBookingFilter.test_filter_by_name.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_filter.TestBookingFilter.test_filter_invalid_date_format.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_filter.TestBookingFilter.test_filter_no_params_returns_all.executor": "Run",
+    "Python tests.Python tests for tests_selenium.api.tests_api.test_filter.TestBookingFilter.test_filter_returns_created_booking.executor": "Run",
+    "Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_catalog_page.executor": "Run",
+    "Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_login_page.executor": "Run",
+    "Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_main_page.executor": "Run",
+    "Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_product_page.executor": "Run",
+    "Python tests.Python tests for tests_selenium.tests.test_find_elements_by.test_register_page.executor": "Run",
+    "Python tests.Python tests in test_add_to_cart.py.executor": "Run",
+    "Python tests.Python tests in test_booking_cru.py.executor": "Run",
+    "Python tests.Python tests in test_booking_negative.py.executor": "Run",
+    "Python tests.Python tests in test_check.py.executor": "Debug",
+    "Python tests.Python tests in test_delete_item_from_cart.py.executor": "Run",
+    "Python tests.Python tests in test_diagnostic.py.executor": "Run",
+    "Python tests.Python tests in test_filter.py.executor": "Run",
+    "Python tests.Python tests in test_find_element_by.py.executor": "Run",
+    "Python tests.Python tests in test_find_elements_by.py.executor": "Run",
+    "Python tests.Python tests in test_login_logout.py.executor": "Run",
+    "Python tests.Python tests in test_my_wishlist.py.executor": "Run",
+    "Python tests.Python tests in test_opecart.py.executor": "Run",
+    "Python tests.Python tests in test_opencart.py.executor": "Debug",
+    "Python tests.Python tests in test_prestashop.py.executor": "Run",
+    "Python tests.Python tests in test_register.py.executor": "Run",
+    "Python tests.Python tests in test_swiith_currency_catalog.py.executor": "Run",
+    "Python tests.Python tests in test_swiith_currency_main_page.py.executor": "Run",
+    "Python.admin_login_page.executor": "Run",
+    "Python.login_page.executor": "Run",
+    "Python.product_page.executor": "Run",
+    "Python.register_page.executor": "Run",
+    "Python.step1_get_ps_data.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/sereg/PycharmProjects/OTUS-Auto-web-QA-2026-SELENIUM/tests_selenium/page_objects",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_selenium\page_objects" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_2\tests" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_selenium\tests" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_selenium" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_selenium\api" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\process_parser" />
+      <recent name="C:\Users\sereg\PycharmProjects\OTUS-Auto-web-QA-2026-SELENIUM\tests_selenium\" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python tests.Python tests for tests_selenium.api.tests_api.test_booking_cru.TestBookingCrud.test_update_booking">
+    <configuration name="Allure Tests" type="tests" factoryName="py.test">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.14 (OTUS-Auto-web-QA-2026-SELENIUM)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;--alluredir\u003dallure-results -v&quot;" />
+      <option name="_new_target" value="&quot;tests_selenium/tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for tests_selenium.api.tests_api.test_booking_cru.TestBookingCrud.test_update_booking" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests_selenium.api.tests_api.test_booking_cru.TestBookingCrud.test_update_booking&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for tests_selenium.api.tests_api.test_booking_negative.TestBookingNegative.test_update_booking_without_firstname" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests_selenium.api.tests_api.test_booking_negative.TestBookingNegative.test_update_booking_without_firstname&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_booking_cru.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests_selenium/api/tests_api/test_booking_cru.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_booking_negative.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests_selenium/api/tests_api/test_booking_negative.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in test_filter.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="OTUS-Auto-web-QA-2026-SELENIUM" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests_selenium/api/tests_api/test_filter.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python tests.Allure Tests" />
+      <item itemvalue="Python tests.Python tests for tests_selenium.api.tests_api.test_booking_cru.TestBookingCrud.test_update_booking" />
+      <item itemvalue="Python tests.Python tests for tests_selenium.api.tests_api.test_booking_negative.TestBookingNegative.test_update_booking_without_firstname" />
+      <item itemvalue="Python tests.Python tests in test_booking_cru.py" />
+      <item itemvalue="Python tests.Python tests in test_booking_negative.py" />
+      <item itemvalue="Python tests.Python tests in test_filter.py" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests for tests_selenium.api.tests_api.test_booking_cru.TestBookingCrud.test_update_booking" />
+        <item itemvalue="Python tests.Python tests in test_booking_cru.py" />
+        <item itemvalue="Python tests.Python tests in test_filter.py" />
+        <item itemvalue="Python tests.Python tests in test_booking_negative.py" />
+        <item itemvalue="Python tests.Python tests for tests_selenium.api.tests_api.test_booking_negative.TestBookingNegative.test_update_booking_without_firstname" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-4e2b1448bda8-9a97661f3031-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.27397.106" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1015209f-1887-4691-a9a7-3438acc004ed" name="Changes" comment="" />
+      <created>1779652188556</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1779652188556</updated>
+    </task>
+    <task id="LOCAL-00039" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790266844767</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1790266844767</updated>
+    </task>
+    <task id="LOCAL-00040" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790267592898</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1790267592898</updated>
+    </task>
+    <task id="LOCAL-00041" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790268093711</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1790268093711</updated>
+    </task>
+    <task id="LOCAL-00042" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790268336087</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1790268336087</updated>
+    </task>
+    <task id="LOCAL-00043" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790268835946</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1790268835946</updated>
+    </task>
+    <task id="LOCAL-00044" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790269529323</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1790269529323</updated>
+    </task>
+    <task id="LOCAL-00045" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790269961155</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1790269961155</updated>
+    </task>
+    <task id="LOCAL-00046" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790271264448</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1790271264448</updated>
+    </task>
+    <task id="LOCAL-00047" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790271928964</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1790271928964</updated>
+    </task>
+    <task id="LOCAL-00048" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790329408721</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1790329408721</updated>
+    </task>
+    <task id="LOCAL-00049" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790330130445</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1790330130445</updated>
+    </task>
+    <task id="LOCAL-00050" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790333320167</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1790333320169</updated>
+    </task>
+    <task id="LOCAL-00051" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790335082061</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1790335082061</updated>
+    </task>
+    <task id="LOCAL-00052" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790336375594</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1790336375594</updated>
+    </task>
+    <task id="LOCAL-00053" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790336724470</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1790336724470</updated>
+    </task>
+    <task id="LOCAL-00054" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790337365992</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1790337365992</updated>
+    </task>
+    <task id="LOCAL-00055" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790337795337</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1790337795337</updated>
+    </task>
+    <task id="LOCAL-00056" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790337800405</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1790337800405</updated>
+    </task>
+    <task id="LOCAL-00057" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790338689565</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1790338689565</updated>
+    </task>
+    <task id="LOCAL-00058" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790340048326</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1790340048326</updated>
+    </task>
+    <task id="LOCAL-00059" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790344586909</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1790344586911</updated>
+    </task>
+    <task id="LOCAL-00060" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790345177974</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1790345177974</updated>
+    </task>
+    <task id="LOCAL-00061" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790346011380</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1790346011380</updated>
+    </task>
+    <task id="LOCAL-00062" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790608759714</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1790608759714</updated>
+    </task>
+    <task id="LOCAL-00063" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790608983376</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1790608983376</updated>
+    </task>
+    <task id="LOCAL-00064" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790609178206</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1790609178206</updated>
+    </task>
+    <task id="LOCAL-00065" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790609453823</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1790609453823</updated>
+    </task>
+    <task id="LOCAL-00066" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790609705240</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1790609705240</updated>
+    </task>
+    <task id="LOCAL-00067" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790611765010</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1790611765010</updated>
+    </task>
+    <task id="LOCAL-00068" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790612476325</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1790612476325</updated>
+    </task>
+    <task id="LOCAL-00069" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790612936792</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1790612936792</updated>
+    </task>
+    <task id="LOCAL-00070" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790681860358</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1790681860358</updated>
+    </task>
+    <task id="LOCAL-00071" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790684519206</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1790684519206</updated>
+    </task>
+    <task id="LOCAL-00072" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790684716271</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1790684716271</updated>
+    </task>
+    <task id="LOCAL-00073" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790685401776</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1790685401776</updated>
+    </task>
+    <task id="LOCAL-00074" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790685801003</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1790685801003</updated>
+    </task>
+    <task id="LOCAL-00075" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790686289963</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1790686289963</updated>
+    </task>
+    <task id="LOCAL-00076" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790690270378</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1790690270378</updated>
+    </task>
+    <task id="LOCAL-00077" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790691699492</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1790691699492</updated>
+    </task>
+    <task id="LOCAL-00078" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790692300460</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1790692300460</updated>
+    </task>
+    <task id="LOCAL-00079" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790692527664</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1790692527664</updated>
+    </task>
+    <task id="LOCAL-00080" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790692885730</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1790692885730</updated>
+    </task>
+    <task id="LOCAL-00081" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790759610736</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1790759610736</updated>
+    </task>
+    <task id="LOCAL-00082" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790760747479</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1790760747479</updated>
+    </task>
+    <task id="LOCAL-00083" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790760985751</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1790760985751</updated>
+    </task>
+    <task id="LOCAL-00084" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790762787458</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1790762787458</updated>
+    </task>
+    <task id="LOCAL-00085" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790764012651</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1790764012651</updated>
+    </task>
+    <task id="LOCAL-00086" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790780444496</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1790780444496</updated>
+    </task>
+    <task id="LOCAL-00087" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1790789666591</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1790789666591</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="778eb924-5406-46a2-94ed-b03527e666f4" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="778eb924-5406-46a2-94ed-b03527e666f4">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/hw1" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="selenium/поиск элементов/ожидание элементов PrestaShop" />
+    <MESSAGE value="page_object" />
+    <MESSAGE value="logging and allure (#3)" />
+    <MESSAGE value="logging and allure" />
+    <MESSAGE value="docker_homework" />
+    <MESSAGE value="selenoid(selenium-grid)_homework" />
+    <MESSAGE value="Jenkins" />
+    <MESSAGE value="Jenkins2" />
+    <MESSAGE value="docker-compose" />
+    <MESSAGE value="Исправления CartPage" />
+    <MESSAGE value="README.md" />
+    <MESSAGE value="docker changes" />
+    <MESSAGE value="con cha" />
+    <MESSAGE value="jenkins file" />
+    <MESSAGE value="jenkins file2" />
+    <MESSAGE value="conftest changes" />
+    <MESSAGE value="шinitial commit" />
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests_selenium/pages_i/home_page.py</url>
+          <line>111</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests_selenium/pages_i/home_page.py</url>
+          <line>99</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests_selenium/tests/test_register.py</url>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests_selenium/page_objects/base_page.py</url>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests_selenium/page_objects/login_page.py</url>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests_selenium/api/api_clients/booking_api.py</url>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests_selenium/tests/test_add_to_cart.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
