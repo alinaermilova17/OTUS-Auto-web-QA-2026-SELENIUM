@@ -26,25 +26,20 @@ class WishlistPage(BasePage):
         ".modal-footer > button.btn.btn-primary"
     )
 
-
-    @allure.step("Открыть Clothes → Women")
     def open_women_category(self):
         self.click(self.CLOTHES_MENU)
         self.click(self.WOMEN_LINK)
         return self
 
-    @allure.step("Открыть карточку товара")
     def open_brown_bear_product(self):
         self.click(self.PRODUCT_BROWN_BEAR)
         return self
 
-    @allure.step("Проверить, что открыт товар")
     def is_product_opened(self) -> bool:
         url = self.browser.current_url
         allure.attach(url, "current url", allure.attachment_type.TEXT)
         return "brown-bear-printed-sweater" in url
 
-    @allure.step("Добавить в wishlist")
     def add_to_wishlist(self):
         self.click(self.WISHLIST_BUTTON)
         self.wait_visible(self.WISHLIST_MODAL, timeout=10)
@@ -54,45 +49,24 @@ class WishlistPage(BasePage):
 
         return self
 
-    @allure.step("Добавить в wishlist (если ещё не добавлен)")
-    def ensure_in_wishlist(self):
-        icon = self.find(self.WISHLIST_ICON)
-        classes = icon.get_attribute("class") or ""
-        allure.attach(classes, "icon class before", allure.attachment_type.TEXT)
-
-        if "favorite_border" in classes:
-            self.click(self.WISHLIST_BUTTON)
-            self.wait.until(
-                lambda d: "favorite_border" not in (
-                        d.find_element(*self.WISHLIST_ICON).get_attribute("class") or ""
-                )
-            )
-        return self
-
-
-    @allure.step("Перейти в My wishlists через футер")
     def open_my_wishlist(self):
         self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         self.click(self.MY_WISHLIST_FOOTER)
         return self
 
-    @allure.step("Открыть первый сохранённый wishlist")
     def open_first_wishlist(self):
         self.click(self.WISHLIST_LIST_FIRST)
         return self
 
-    @allure.step("Проверить, что товар есть в wishlist")
     def has_product_in_wishlist(self) -> bool:
         return self.is_visible(self.WISHLIST_PRODUCT_IMG)
 
-    @allure.step("Убедиться, что товар в wishlist")
     def ensure_in_wishlist(self):
         icon = self.find(self.WISHLIST_ICON)
         classes = icon.get_attribute("class") or ""
         allure.attach(classes, "icon class before", allure.attachment_type.TEXT)
 
         if "favorite_border" in classes:
-            # товара нет — добавляем
             allure.attach("adding to wishlist", "action", allure.attachment_type.TEXT)
             self.click(self.WISHLIST_BUTTON)
             self.wait.until(
@@ -101,29 +75,18 @@ class WishlistPage(BasePage):
                 )
             )
         else:
-            # товар уже в wishlist — ничего не делаем
             allure.attach("already in wishlist", "action", allure.attachment_type.TEXT)
 
         return self
 
-    @allure.step("Очистить первый wishlist от всех товаров")
     def clear_all_wishlists(self):
-        """
-        Открывает My wishlists → первый список → удаляет все товары.
-        """
-        # 1. Перейти в футер → My wishlists
         self.open_my_wishlist()
-
-        # 2. Открыть первый список
         self.open_first_wishlist()
-
-        # 3. Пока есть товары — удалять их
-        max_iterations = 20  # защита от бесконечного цикла
+        max_iterations = 20
         iteration = 0
         while iteration < max_iterations:
             iteration += 1
 
-            # есть ли хотя бы один товар в списке
             items = self.browser.find_elements(*self.WISHLIST_ITEM_ROW)
             if not items:
                 allure.attach(
@@ -139,21 +102,14 @@ class WishlistPage(BasePage):
                 allure.attachment_type.TEXT
             )
 
-            # 4. клик по кнопке удаления первого товара
             delete_btn = self.wait_clickable(self.DELETE_ITEM_BUTTON)
             self.browser.execute_script("arguments[0].click();", delete_btn)
-
-            # 5. ждём модалку подтверждения
             self.wait_visible(self.DELETE_MODAL, timeout=10)
 
-            # 6. клик по кнопке подтверждения в модалке
             confirm_btn = self.wait_clickable(self.DELETE_MODAL_CONFIRM_BTN)
             self.browser.execute_script("arguments[0].click();", confirm_btn)
 
-            # 7. ждём, что модалка исчезла
             self.wait_invisible(self.DELETE_MODAL)
-
-            # 8. ждём, что список обновился (товар исчез)
             try:
                 self.wait.until(
                     lambda d: len(d.find_elements(*self.WISHLIST_ITEM_ROW)) < len(items)
