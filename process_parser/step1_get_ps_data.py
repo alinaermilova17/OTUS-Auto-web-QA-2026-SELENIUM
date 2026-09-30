@@ -1,7 +1,6 @@
 import subprocess
 
 def get_ps_output():
-    """Получаем вывод команды ps aux"""
     try:
         result = subprocess.run(
             ['ps', 'aux'],
