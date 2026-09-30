@@ -44,23 +44,14 @@ class WishlistPage(BasePage):
         allure.attach(url, "current url", allure.attachment_type.TEXT)
         return "brown-bear-printed-sweater" in url
 
+    @allure.step("Добавить в wishlist")
     def add_to_wishlist(self):
         self.click(self.WISHLIST_BUTTON)
+        self.wait_visible(self.WISHLIST_MODAL, timeout=10)
+        item = self.wait_clickable(self.WISHLIST_MODAL_ITEM)
+        self.browser.execute_script("arguments[0].click();", item)
+        self.wait_invisible(self.WISHLIST_MODAL)
 
-        try:
-            self.wait_visible(self.WISHLIST_MODAL, timeout=10)
-            item = self.wait_clickable(self.WISHLIST_MODAL_ITEM)
-            self.browser.execute_script("arguments[0].click();", item)
-            self.wait_invisible(self.WISHLIST_MODAL)
-        except Exception as e:
-            allure.attach(
-                self.browser.get_screenshot_as_png(),
-                "modal_not_found",
-                allure.attachment_type.PNG
-            )
-            allure.attach(
-                str(e), "exception", allure.attachment_type.TEXT
-            )
         return self
 
     @allure.step("Добавить в wishlist (если ещё не добавлен)")
