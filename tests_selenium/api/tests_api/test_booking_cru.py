@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 
 @allure.epic("Restful Booker API")
@@ -61,25 +62,68 @@ class TestBookingCrud:
             )
 
     @allure.story("Update")
-    @allure.title("Обновление брони (PUT)")
-    @allure.description(
-        "Проверяем, что PUT /booking/{id} полностью обновляет бронь. "
-        "Меняем firstname на 'James' и проверяем результат."
-    )
+    @allure.title("Обновление поля '{field}' через PUT")
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.tag("api", "booking", "crud", "update")
-    def test_update_booking(self, api_client, created_booking, auth_token, sample_booking_payload):
+    @pytest.mark.parametrize(
+        "field, new_value",
+        [
+            ("firstname", "James"),
+            ("lastname", "Smith"),
+            ("totalprice", 999),
+            ("depositpaid", False),
+            ("additionalneeds", "Dinner"),
+            (
+                    "bookingdates",
+                    {"checkin": "2025-07-01", "checkout": "2025-07-10"},
+            ),
+        ],
+        ids=[
+            "firstname",
+            "lastname",
+            "totalprice",
+            "depositpaid",
+            "additionalneeds",
+            "bookingdates",
+        ],
+    )
+    def test_update_booking(
+            self,
+            api_client,
+            created_booking,
+            auth_token,
+            sample_booking_payload,
+            field,
+            new_value,
+    ):
         updated = sample_booking_payload.copy()
-        updated["firstname"] = "James"
+        updated[field] = new_value
 
-        with allure.step("Отправляем PUT-запрос с обновлёнными данными"):
+        with allure.step(f"Отправляем PUT с {field}={new_value!r}"):
             response = api_client.update_booking(
-                created_booking["id"], updated, token=auth_token
+                created_booking["id"], updated, token=auth_token,
             )
 
         with allure.step("Проверяем статус-код и обновлённое поле"):
             assert response.status_code == 200, response.text
-            assert response.json()["firstname"] == "James"
+            data = response.json()
+            assert data[field] == new_value, (
+                f"Поле '{field}' не обновилось: "
+                f"ожидали {new_value!r}, получили {data[field]!r}"
+            )
+
+            for key, value in sample_booking_payload.items():
+                if key == field:
+                    continue
+                assert data[key] == value, (
+                    f"Поле '{key}' не должно было меняться: "
+                    f"ожидали {value!r}, получили {data[key]!r}"
+                )
+
+        with allure.step("Проверяем через GET, что изменение сохранилось"):
+            get_response = api_client.get_booking(created_booking["id"])
+            assert get_response.status_code == 200, get_response.text
+            assert get_response.json()[field] == new_value
 
     @allure.story("Update")
     @allure.title("Частичное обновление (PATCH)")
@@ -119,3 +163,5 @@ class TestBookingCrud:
             assert get_response.status_code == 404, (
                 f"Ожидался 404, получен {get_response.status_code}: {get_response.text}"
             )
+
+
