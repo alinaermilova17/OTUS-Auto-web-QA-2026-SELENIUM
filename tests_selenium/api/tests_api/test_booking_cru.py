@@ -88,13 +88,7 @@ class TestBookingCrud:
         ],
     )
     def test_update_booking(
-            self,
-            api_client,
-            created_booking,
-            auth_token,
-            sample_booking_payload,
-            field,
-            new_value,
+            self,api_client,created_booking,auth_token,sample_booking_payload,field,new_value,
     ):
         updated = sample_booking_payload.copy()
         updated[field] = new_value
